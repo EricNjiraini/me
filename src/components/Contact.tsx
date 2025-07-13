@@ -3,8 +3,83 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { toast } from '@/hooks/use-toast';
+
+// Form validation schema
+const contactFormSchema = z.object({
+  firstName: z.string()
+    .min(2, 'First name must be at least 2 characters')
+    .max(50, 'First name must be less than 50 characters')
+    .regex(/^[a-zA-Z\s'-]+$/, 'First name can only contain letters, spaces, hyphens, and apostrophes'),
+  lastName: z.string()
+    .min(2, 'Last name must be at least 2 characters')
+    .max(50, 'Last name must be less than 50 characters')
+    .regex(/^[a-zA-Z\s'-]+$/, 'Last name can only contain letters, spaces, hyphens, and apostrophes'),
+  email: z.string()
+    .email('Please enter a valid email address')
+    .max(100, 'Email must be less than 100 characters'),
+  subject: z.string()
+    .min(5, 'Subject must be at least 5 characters')
+    .max(100, 'Subject must be less than 100 characters'),
+  message: z.string()
+    .min(10, 'Message must be at least 10 characters')
+    .max(1000, 'Message must be less than 1000 characters')
+});
+
+type ContactFormData = z.infer<typeof contactFormSchema>;
+
+// Input sanitization function
+const sanitizeInput = (input: string): string => {
+  return input
+    .replace(/[<>]/g, '') // Remove potential HTML tags
+    .replace(/javascript:/gi, '') // Remove javascript: protocols
+    .trim();
+};
 
 const Contact = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema)
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      // Sanitize all inputs
+      const sanitizedData = {
+        firstName: sanitizeInput(data.firstName),
+        lastName: sanitizeInput(data.lastName),
+        email: sanitizeInput(data.email),
+        subject: sanitizeInput(data.subject),
+        message: sanitizeInput(data.message)
+      };
+
+      // Simulate form submission (replace with actual API call when backend is ready)
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      console.log('Sanitized form data:', sanitizedData);
+      
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for your message. I'll get back to you soon.",
+      });
+      
+      reset();
+    } catch (error) {
+      toast({
+        title: "Error sending message",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const contactInfo = [
     {
       icon: <Mail className="w-6 h-6 text-primary" />,
@@ -118,52 +193,87 @@ const Contact = () => {
           <Card className="bg-card/80 backdrop-blur-sm shadow-card">
             <CardContent className="p-8">
               <h3 className="text-2xl font-semibold mb-6 text-foreground">Send a Message</h3>
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
-                      First Name
+                      First Name <span className="text-destructive">*</span>
                     </label>
-                    <Input placeholder="John" />
+                    <Input 
+                      placeholder="John"
+                      {...register('firstName')}
+                      className={errors.firstName ? 'border-destructive' : ''}
+                    />
+                    {errors.firstName && (
+                      <p className="text-destructive text-sm mt-1">{errors.firstName.message}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
-                      Last Name
+                      Last Name <span className="text-destructive">*</span>
                     </label>
-                    <Input placeholder="Doe" />
+                    <Input 
+                      placeholder="Doe"
+                      {...register('lastName')}
+                      className={errors.lastName ? 'border-destructive' : ''}
+                    />
+                    {errors.lastName && (
+                      <p className="text-destructive text-sm mt-1">{errors.lastName.message}</p>
+                    )}
                   </div>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    Email
+                    Email <span className="text-destructive">*</span>
                   </label>
-                  <Input type="email" placeholder="john@example.com" />
+                  <Input 
+                    type="email" 
+                    placeholder="john@example.com"
+                    {...register('email')}
+                    className={errors.email ? 'border-destructive' : ''}
+                  />
+                  {errors.email && (
+                    <p className="text-destructive text-sm mt-1">{errors.email.message}</p>
+                  )}
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    Subject
+                    Subject <span className="text-destructive">*</span>
                   </label>
-                  <Input placeholder="Project Collaboration" />
+                  <Input 
+                    placeholder="Project Collaboration"
+                    {...register('subject')}
+                    className={errors.subject ? 'border-destructive' : ''}
+                  />
+                  {errors.subject && (
+                    <p className="text-destructive text-sm mt-1">{errors.subject.message}</p>
+                  )}
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">
-                    Message
+                    Message <span className="text-destructive">*</span>
                   </label>
                   <Textarea 
                     placeholder="Tell me about your project or how we can work together..."
                     rows={5}
+                    {...register('message')}
+                    className={errors.message ? 'border-destructive' : ''}
                   />
+                  {errors.message && (
+                    <p className="text-destructive text-sm mt-1">{errors.message.message}</p>
+                  )}
                 </div>
                 
                 <Button 
                   type="submit" 
                   size="lg" 
-                  className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300 disabled:opacity-50"
                 >
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
               </form>
             </CardContent>
