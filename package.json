@@ -4,14 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   
-  "scripts": {
+ "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "clean-deploy": "rimraf dist && gh-pages-clean",
     "predeploy": "npm run build",
-    "deploy": "npm run clean-deploy && gh-pages -d dist"
+    "deploy": "npm run clean-deploy && npm run build && gh-pages -d dist"
 }, 
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
