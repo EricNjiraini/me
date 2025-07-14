@@ -12,7 +12,7 @@
     "clean-deploy": "rimraf dist && gh-pages-clean",
     "predeploy": "npm run build",
     "deploy": "npm run clean-deploy && gh-pages -d dist"
-}
+}, 
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
