@@ -9,7 +9,6 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build && copy-index-404",
-    "copy-index-404": "copy dist\\index.html dist\\404.html",
     "deploy": "npm run predeploy && gh-pages -d dist"
 }, 
   "dependencies": {
