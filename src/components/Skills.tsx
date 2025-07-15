@@ -20,7 +20,7 @@ const Skills = () => {
       skills: ["Tableau", "Power BI", "Plotly", "D3.js", "Metabase", "Domo"]
     },
     {
-      icon: <BarChart3 className="w-6 h-6 text-primary" />,
+      icon: <Database className="w-6 h-6 text-primary" />,
       title: "Data Warehousing",
       skills: ["PostgreSQL", "Oracle", "Redshift"]
     },
