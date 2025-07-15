@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import resumePdf from '@/assets/Eric_Njiraini_Resume.pdf';
+import resumePdf from '@/assets/cv_eric_njiraini.pdf';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,7 +43,8 @@ const Header = () => {
     >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="text-xl font-bold text-primary">DataAnalyst</div>
+          {/* Brand / Name */}
+          <div className="text-xl font-bold text-primary">Eric Njiraini | Analytics for Impact</div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8 items-center">
