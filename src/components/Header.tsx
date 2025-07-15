@@ -1,15 +1,31 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import resumePdf from '@/assets/cv_eric_njiraini.pdf';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      // Scrollspy logic
+      const sections = ['about', 'skills', 'projects', 'contact'];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 80 && rect.bottom >= 80) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -20,24 +36,52 @@ const Header = () => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-background/90 backdrop-blur-md shadow-card' : 'bg-transparent'
-    }`}>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-background/90 backdrop-blur-md shadow-card' : 'bg-transparent'
+      }`}
+    >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="text-xl font-bold text-primary">DataAnalyst</div>
-          
+
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-8 items-center">
             {['about', 'skills', 'projects', 'contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="text-foreground hover:text-primary transition-colors duration-200 capitalize"
+                className={`relative capitalize transition-colors duration-200 ${
+                  activeSection === item
+                    ? 'text-primary font-semibold'
+                    : 'text-foreground hover:text-primary'
+                } group`}
               >
                 {item}
+                <span
+                  className={`absolute left-0 -bottom-1 h-[2px] bg-primary transition-all duration-300 ${
+                    activeSection === item ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+                />
               </button>
             ))}
+
+            {/* Download CV */}
+            <a
+              href={resumePdf}
+              download
+              className="ml-4 text-sm font-medium text-foreground hover:text-primary border border-border px-4 py-2 rounded-lg transition"
+            >
+              Download CV
+            </a>
+
+            {/* Animated Hire Me Button */}
+            <Button
+              className="ml-2 animate-pulse hover:animate-none transition-all duration-300"
+              onClick={() => scrollToSection('contact')}
+            >
+              Hire Me
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
