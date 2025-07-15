@@ -8,8 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build && copy-index-404",
-    "deploy": "npm run predeploy && gh-pages -d dist"
+    "clean-deploy": "rimraf dist && gh-pages-clean",
+    "predeploy": "npm run build",
+    "deploy": "npm run clean-deploy && npm run build && gh-pages -d dist"
 }, 
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
