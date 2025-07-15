@@ -7,22 +7,22 @@ const Skills = () => {
     {
       icon: <Code className="w-6 h-6 text-primary" />,
       title: "Programming Languages",
-      skills: ["Python", "R", "SQL", "JavaScript", "VBA", "MATLAB"]
+      skills: ["Python", "R", "SQL"]
     },
     {
       icon: <Database className="w-6 h-6 text-primary" />,
       title: "Data Tools & Platforms",
-      skills: ["Pandas", "NumPy", "Jupyter", "Git", "Docker", "Apache Spark"]
+      skills: ["Pandas", "NumPy", "Jupyter", "AWS", "Docker", "Apache Spark"]
     },
     {
       icon: <BarChart3 className="w-6 h-6 text-primary" />,
       title: "Visualization Tools",
-      skills: ["Tableau", "Power BI", "Matplotlib", "Seaborn", "Plotly", "D3.js"]
+      skills: ["Tableau", "Power BI", "Plotly", "D3.js"]
     },
     {
       icon: <Brain className="w-6 h-6 text-primary" />,
       title: "Analytics & ML",
-      skills: ["Statistical Analysis", "Machine Learning", "A/B Testing", "Time Series", "Regression", "Classification"]
+      skills: ["Statistical Analysis", "Machine Learning", "A/B Testing", "Time Series", "Regression", "Classification", "Cloud Computing]
     }
   ];
 
