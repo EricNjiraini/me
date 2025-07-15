@@ -1,6 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Code, Database, BarChart3, Brain } from 'lucide-react';
+import CountUp from 'react-countup';
 
 const Skills = () => {
   const skillCategories = [
@@ -71,27 +72,39 @@ const Skills = () => {
         {/* Experience Summary */}
         <div className="mt-16 grid md:grid-cols-3 gap-8 text-center">
           <div className="animate-slide-up">
-            <div className="text-4xl font-bold text-primary mb-2">5+</div>
+            <div className="text-4xl font-bold text-primary mb-2">
+              <CountUp end={5} duration={2} />+
+            </div>
             <div className="text-muted-foreground">Years of Experience</div>
           </div>
           <div className="animate-slide-up">
-            <div className="text-4xl font-bold text-primary mb-2">20+</div>
+            <div className="text-4xl font-bold text-primary mb-2">
+              <CountUp end={20} duration={2} />+
+            </div>
             <div className="text-muted-foreground">Dashboards Built</div>
           </div>
           <div className="animate-slide-up">
-            <div className="text-4xl font-bold text-primary mb-2">$5M+</div>
+            <div className="text-4xl font-bold text-primary mb-2">
+              $<CountUp end={5} duration={2} />M+
+            </div>
             <div className="text-muted-foreground">Business Impact Delivered</div> 
           </div>
           <div className="animate-slide-up">
-            <div className="text-4xl font-bold text-primary mb-2">5+</div>
+            <div className="text-4xl font-bold text-primary mb-2">
+              <CountUp end={5} duration={2} />+
+            </div>
             <div className="text-muted-foreground">Cross-Functional Projects Led</div>
           </div>
           <div className="animate-slide-up">
-            <div className="text-4xl font-bold text-primary mb-2">30%</div>
+            <div className="text-4xl font-bold text-primary mb-2">
+              <CountUp end={30} duration={2} />%
+            </div>
             <div className="text-muted-foreground">Improvement in Reporting Efficiency</div> 
           </div>
           <div className="animate-slide-up">
-            <div className="text-4xl font-bold text-primary mb-2">7</div>
+            <div className="text-4xl font-bold text-primary mb-2">
+              <CountUp end={7} duration={2} />
+            </div>
             <div className="text-muted-foreground">Analysts Mentored</div>
           </div>
         </div>
