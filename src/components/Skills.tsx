@@ -75,15 +75,15 @@ const Skills = () => {
               </div>
               <div className="animate-slide-up">
                 <div className="text-4xl font-bold text-primary mb-2">$5M+</div>
-                <div className="text-muted-foreground">Business Impact Delivered</div> <!-- changed "Enabled" to "Delivered" -->
+                <div className="text-muted-foreground">Business Impact Delivered</div> 
               </div>
               <div className="animate-slide-up">
                 <div className="text-4xl font-bold text-primary mb-2">5+</div>
-                <div className="text-muted-foreground">Cross-Functional Projects Led</div> <!-- added context -->
+                <div className="text-muted-foreground">Cross-Functional Projects Led</div>
               </div>
               <div className="animate-slide-up">
                 <div className="text-4xl font-bold text-primary mb-2">305%</div>
-                <div className="text-muted-foreground">Improvement in Reporting Efficiency</div> <!-- added % and "Improvement" -->
+                <div className="text-muted-foreground">Improvement in Reporting Efficiency</div> 
               </div>
               <div className="animate-slide-up">
                 <div className="text-4xl font-bold text-primary mb-2">7</div>
