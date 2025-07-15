@@ -64,18 +64,31 @@ const Skills = () => {
         </div>
 
         {/* Experience Summary */}
-        <div className="mt-16 grid md:grid-cols-3 gap-8 text-center">
-          <div className="animate-slide-up">
-            <div className="text-4xl font-bold text-primary mb-2">3+</div>
-            <div className="text-muted-foreground">Years Experience</div>
-          </div>
-          <div className="animate-slide-up">
-            <div className="text-4xl font-bold text-primary mb-2">15+</div>
-            <div className="text-muted-foreground">Projects Completed</div>
-          </div>
-          <div className="animate-slide-up">
-            <div className="text-4xl font-bold text-primary mb-2">5+</div>
-            <div className="text-muted-foreground">Tools Mastered</div>
+          <div className="mt-16 grid md:grid-cols-3 gap-8 text-center">
+            <div className="animate-slide-up">
+              <div className="text-4xl font-bold text-primary mb-2">6+</div>
+              <div className="text-muted-foreground">Years Experience</div>
+            </div>
+            <div className="animate-slide-up">
+              <div className="text-4xl font-bold text-primary mb-2">30+</div>
+              <div className="text-muted-foreground">Dashboards Built</div>
+            </div>
+            <div className="animate-slide-up">
+              <div className="text-4xl font-bold text-primary mb-2">$2M+</div>
+              <div className="text-muted-foreground">Business Impact Enabled</div>
+            </div>
+            <div className="animate-slide-up">
+              <div className="text-4xl font-bold text-primary mb-2">10+</div>
+              <div className="text-muted-foreground">Departments Supported</div>
+            </div>
+            <div className="animate-slide-up">
+              <div className="text-4xl font-bold text-primary mb-2">5</div>
+              <div className="text-muted-foreground">Data Tools Mastered</div>
+            </div>
+            <div className="animate-slide-up">
+              <div className="text-4xl font-bold text-primary mb-2">3</div>
+              <div className="text-muted-foreground">Analysts Mentored</div>
+            </div>
           </div>
         </div>
       </div>
