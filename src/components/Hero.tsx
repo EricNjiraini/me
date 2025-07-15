@@ -15,18 +15,20 @@ const Hero = () => {
         style={{ backgroundImage: `url(${heroImage})` }}
       />
       <div className="absolute inset-0 bg-gradient-primary opacity-5" />
-      
+
       <div className="relative z-10 container mx-auto px-6 text-center">
         <div className="animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-            Data Analyst
+            Eric Njiraini
           </h1>
           <h2 className="text-2xl md:text-3xl text-foreground mb-8">
-            Transforming Data into Insights
+            Data Analytics Leader • Insight Architect • Storyteller
           </h2>
+
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
-            Passionate about uncovering stories hidden in data and creating visualizations 
-            that drive informed business decisions. Welcome to my portfolio.
+            I help mission-driven teams unlock the full value of their data—from raw information 
+            to strategy-shaping insights. Whether it’s dashboards, predictive analysis, or 
+            operations intelligence, I turn complexity into clarity.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
@@ -35,14 +37,14 @@ const Hero = () => {
               onClick={() => scrollToSection('projects')}
               className="bg-gradient-primary hover:shadow-glow transition-all duration-300"
             >
-              View My Work
+              Explore My Work
             </Button>
             <Button 
               variant="outline" 
               size="lg"
               onClick={() => scrollToSection('contact')}
             >
-              Get In Touch
+              Let’s Connect
             </Button>
           </div>
 
