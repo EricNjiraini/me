@@ -105,12 +105,12 @@ const Contact = () => {
     {
       icon: <Github className="w-5 h-5" />,
       name: "GitHub",
-      url: "https://github.com/yourusername"
+      url: "https://github.com/EricNjiraini"
     },
     {
       icon: <Linkedin className="w-5 h-5" />,
       name: "LinkedIn", 
-      url: "https://linkedin.com/in/yourusername"
+      url: "https://linkedin.com/in/ericnjiraini"
     },
     {
       icon: <MessageSquare className="w-5 h-5" />,
