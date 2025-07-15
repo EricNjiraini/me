@@ -1,5 +1,3 @@
-'use client';
-
 import { Github, ExternalLink, BarChart3, TrendingUp, Database } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
