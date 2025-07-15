@@ -50,10 +50,24 @@ const About = () => {
               learning and adapting to new technologies in the ever-evolving field of 
               data science.
             </p>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              When I'm not analyzing data, you'll find me contributing to open-source 
-              projects and sharing knowledge with the data community.
+            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+              When I’m not deep in dashboards or wrangling datasets, you’ll probably catch me on a hiking trail, chasing sunrises and fresh air. 
+              I also love contributing to open-source projects and sharing knowledge with the data community on LinkedIn..
             </p>
+
+            {/* Quotes Section */}
+            <div className="mt-12 text-center max-w-2xl mx-auto space-y-6">
+              <p className="text-muted-foreground text-lg italic">
+                "The goal is to turn data into information, and information into insight."
+                <br />
+                <span className="text-sm not-italic text-muted">— Carly Fiorina</span>
+              </p>
+              <p className="text-muted-foreground text-lg italic">
+                "In God we trust. All others must bring data."
+                <br />
+                <span className="text-sm not-italic text-muted">— W. Edwards Deming</span>
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-6">
