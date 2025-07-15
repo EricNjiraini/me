@@ -8,7 +8,7 @@ const Skills = () => {
     {
       icon: <Code className="w-6 h-6 text-primary" />,
       title: "Programming Languages",
-      skills: ["Python", "R", "SQL", "Pyspark", "Lambda"]
+      skills: ["Python", "R", "SQL", "Pyspark", "AWS Lambda"]
     },
     {
       icon: <Database className="w-6 h-6 text-primary" />,
