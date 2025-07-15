@@ -64,30 +64,31 @@ const Skills = () => {
         </div>
 
         {/* Experience Summary */}
-          <div className="mt-16 grid md:grid-cols-3 gap-8 text-center">
-            <div className="animate-slide-up">
-              <div className="text-4xl font-bold text-primary mb-2">5+</div>
-              <div className="text-muted-foreground">Years of Experience</div>
-            </div>
-            <div className="animate-slide-up">
-              <div className="text-4xl font-bold text-primary mb-2">20+</div>
-              <div className="text-muted-foreground">Dashboards Built</div>
-            </div>
-            <div className="animate-slide-up">
-              <div className="text-4xl font-bold text-primary mb-2">$5M+</div>
-              <div className="text-muted-foreground">Business Impact Enabled</div>
-            </div>
-            <div className="animate-slide-up">
-              <div className="text-4xl font-bold text-primary mb-2">5+</div>
-              <div className="text-muted-foreground">Projects Led</div>
-            </div>
-            <div className="animate-slide-up">
-              <div className="text-4xl font-bold text-primary mb-2">305</div>
-              <div className="text-muted-foreground">Increase in Reporting Efficiency</div>
-            </div>
-            <div className="animate-slide-up">
-              <div className="text-4xl font-bold text-primary mb-2">7</div>
-              <div className="text-muted-foreground">Analysts Mentored</div>
+            <div className="mt-16 grid md:grid-cols-3 gap-8 text-center">
+              <div className="animate-slide-up">
+                <div className="text-4xl font-bold text-primary mb-2">5+</div>
+                <div className="text-muted-foreground">Years of Experience</div>
+              </div>
+              <div className="animate-slide-up">
+                <div className="text-4xl font-bold text-primary mb-2">20+</div>
+                <div className="text-muted-foreground">Dashboards Built</div>
+              </div>
+              <div className="animate-slide-up">
+                <div className="text-4xl font-bold text-primary mb-2">$5M+</div>
+                <div className="text-muted-foreground">Business Impact Delivered</div> <!-- changed "Enabled" to "Delivered" -->
+              </div>
+              <div className="animate-slide-up">
+                <div className="text-4xl font-bold text-primary mb-2">5+</div>
+                <div className="text-muted-foreground">Cross-Functional Projects Led</div> <!-- added context -->
+              </div>
+              <div className="animate-slide-up">
+                <div className="text-4xl font-bold text-primary mb-2">305%</div>
+                <div className="text-muted-foreground">Improvement in Reporting Efficiency</div> <!-- added % and "Improvement" -->
+              </div>
+              <div className="animate-slide-up">
+                <div className="text-4xl font-bold text-primary mb-2">7</div>
+                <div className="text-muted-foreground">Analysts Mentored</div>
+              </div>
             </div>
           </div>
         </div>
