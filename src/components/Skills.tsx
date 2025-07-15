@@ -22,7 +22,7 @@ const Skills = () => {
     {
       icon: <Brain className="w-6 h-6 text-primary" />,
       title: "Analytics & ML",
-      skills: ["Statistical Analysis", "Machine Learning", "A/B Testing", "Time Series", "Regression", "Classification", "Cloud Computing]
+      skills: ["Statistical Analysis", "Machine Learning", "A/B Testing", "Time Series", "Regression", "Classification", "Cloud Computing"]
     }
   ];
 
