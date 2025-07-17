@@ -35,7 +35,7 @@ const socialLinks = [
   {
     icon: <Linkedin className="w-5 h-5" />,
     name: 'LinkedIn',
-    url: 'www.linkedin.com/in/eric-njiraini',
+    url: 'https://www.linkedin.com/in/eric-njiraini/',
   },
 ];
 
