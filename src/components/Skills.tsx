@@ -73,37 +73,37 @@ const Skills = () => {
         <div className="mt-16 grid md:grid-cols-3 gap-8 text-center">
           <div className="animate-slide-up">
             <div className="text-4xl font-bold text-primary mb-2">
-              <CountUp end={5} duration={2} />+
+              <CountUp end={5} duration={4} />+
             </div>
             <div className="text-muted-foreground">Years of Experience</div>
           </div>
           <div className="animate-slide-up">
             <div className="text-4xl font-bold text-primary mb-2">
-              <CountUp end={20} duration={2} />+
+              <CountUp end={20} duration={4} />+
             </div>
             <div className="text-muted-foreground">Dashboards Built</div>
           </div>
           <div className="animate-slide-up">
             <div className="text-4xl font-bold text-primary mb-2">
-              $<CountUp end={5} duration={2} />M+
+              $<CountUp end={5} duration={4} />M+
             </div>
             <div className="text-muted-foreground">Business Impact Delivered</div> 
           </div>
           <div className="animate-slide-up">
             <div className="text-4xl font-bold text-primary mb-2">
-              <CountUp end={5} duration={2} />+
+              <CountUp end={5} duration={4} />+
             </div>
             <div className="text-muted-foreground">Cross-Functional Projects Led</div>
           </div>
           <div className="animate-slide-up">
             <div className="text-4xl font-bold text-primary mb-2">
-              <CountUp end={30} duration={2} />%
+              <CountUp end={30} duration={4} />%
             </div>
             <div className="text-muted-foreground">Improvement in Reporting Efficiency</div> 
           </div>
           <div className="animate-slide-up">
             <div className="text-4xl font-bold text-primary mb-2">
-              <CountUp end={7} duration={2} />
+              <CountUp end={7} duration={4} />
             </div>
             <div className="text-muted-foreground">Analysts Mentored</div>
           </div>
