@@ -68,12 +68,12 @@ const About = () => {
               <p className="text-muted-foreground text-lg italic">
                 "The goal is to turn data into information, and information into insight."
                 <br />
-                <span className="text-sm not-italic text-muted">— Carly Fiorina</span>
+                <span className="text-sm not-italic text-muted-foreground">— Carly Fiorina</span>
               </p>
               <p className="text-muted-foreground text-lg italic">
                 "In God we trust. All others must bring data."
                 <br />
-                <span className="text-sm not-italic text-muted">— W. Edwards Deming</span>
+                 <span className="text-sm not-italic text-muted-foreground">— W. Edwards Deming</span>
               </p>
             </div>
           </div>
