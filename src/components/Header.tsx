@@ -78,7 +78,8 @@ const Header = () => {
 
             {/* Animated Hire Me Button */}
             <Button
-              className="ml-2 animate-pulse hover:animate-none transition-all duration-300"
+              className="ml-2 animate-pulse hover:animate-none transition-all duration-500"
+              style={{ animationDuration: '2.5s' }}
               onClick={() => scrollToSection('contact')}
             >
               Hire Me
