@@ -29,23 +29,7 @@ export default function ContactForm() {
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      // For now, simulate successful submission since Formspree isn't configured
-      // To use Formspree: replace 'YOUR_ENDPOINT_ID' with your actual endpoint ID from formspree.io
-      const FORMSPREE_ENDPOINT = "YOUR_ENDPOINT_ID"; // Replace with your actual endpoint ID
-      
-      if (FORMSPREE_ENDPOINT === "YOUR_ENDPOINT_ID") {
-        // Simulate form submission for demo purposes
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        toast({
-          title: "Message received!",
-          description: `Thank you ${data.firstName}! Your message has been received. Please email me directly at menjiraini@gmail.com for now.`,
-        });
-        reset();
-        return;
-      }
-
-      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ENDPOINT}`, {
+      const response = await fetch("https://formspree.io/f/xdkdkopy", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,11 +37,9 @@ export default function ContactForm() {
         },
         body: JSON.stringify({
           email: data.email,
-          message: `
-            Name: ${data.firstName} ${data.lastName}
-            Subject: ${data.subject}
-            Message: ${data.message}
-          `,
+          name: `${data.firstName} ${data.lastName}`,
+          subject: data.subject,
+          message: data.message,
         }),
       });
 
@@ -73,10 +55,10 @@ export default function ContactForm() {
     } catch (error) {
       console.error("Contact form error:", error);
       toast({
-        title: "Message received!",
-        description: "Please email me directly at menjiraini@gmail.com for now.",
+        title: "Error sending message",
+        description: "Please try again later.",
+        variant: "destructive",
       });
-      reset();
     }
   };
 
