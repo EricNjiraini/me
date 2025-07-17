@@ -23,6 +23,8 @@ const Hero = () => {
           </h1>
           <h2 className="text-2xl md:text-3xl text-foreground mb-8 mt-4">
             Data Analytics Leader • Insight Architect • Storyteller
+          </h2>
+          <h2 className="text-1xl md:text-2xl text-foreground mb-8 mt-4">
             Where Business Meets Data - and Insight Drives Decision
           </h2>
 
