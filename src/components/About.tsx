@@ -38,21 +38,29 @@ const About = () => {
             <h3 className="text-2xl font-semibold mb-6 text-foreground">
               Turning Data into Decisions
             </h3>
+
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
               As a passionate data analyst, I specialize in extracting meaningful insights 
               from complex datasets. With a strong foundation in statistical analysis and 
               data visualization, I help organizations make data-driven decisions that 
               drive growth and efficiency.
             </p>
+
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              My expertise spans across various tools and technologies, from Python and R 
-              for analysis to Tableau and Power BI for visualization. I'm constantly 
-              learning and adapting to new technologies in the ever-evolving field of 
-              data science.
+              🧠 Tools of the trade:
+              <br />• Python 🐍 and R 📊 for advanced analytics
+              <br />• Tableau and Power BI 📈 for compelling dashboards
+              <br />• SQL and data pipelines ⚙️ for wrangling messy data
             </p>
+
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              When I’m not deep in dashboards or wrangling datasets, you’ll probably catch me on a hiking trail, chasing sunrises and fresh air. 
-              I also love contributing to open-source projects and sharing knowledge with the data community on LinkedIn..
+              🚀 I'm constantly learning and adapting to new technologies in the ever-evolving 
+              field of data science—because staying curious is part of the job.
+            </p>
+
+            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+              ⛰️ When I’m not deep in dashboards or wrangling datasets, you’ll find me hiking trails, 
+              chasing sunrises, or sharing knowledge with the global data community on LinkedIn.
             </p>
 
             {/* Quotes Section */}
