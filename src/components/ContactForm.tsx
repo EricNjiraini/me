@@ -1,112 +1,106 @@
-// components/ContactForm.tsx
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
+import { Label } from "@/components/ui/label";
 
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { toast } from '@/hooks/use-toast';
-
-// Validation schema
-const contactFormSchema = z.object({
-  firstName: z.string().min(2).max(50),
-  lastName: z.string().min(2).max(50),
-  email: z.string().email().max(100),
-  subject: z.string().min(5).max(100),
-  message: z.string().min(10).max(1000)
+const formSchema = z.object({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  email: z.string().email("Invalid email address"),
+  subject: z.string().min(1, "Subject is required"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
-type ContactFormData = z.infer<typeof contactFormSchema>;
+type ContactFormData = z.infer<typeof formSchema>;
 
-const sanitizeInput = (input: string) =>
-  input.replace(/[<>]/g, '').replace(/javascript:/gi, '').trim();
-
-const ContactForm = () => {
+export default function ContactForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
-    reset
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema)
+    resolver: zodResolver(formSchema),
   });
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      const sanitizedData = {
-        firstName: sanitizeInput(data.firstName),
-        lastName: sanitizeInput(data.lastName),
-        email: sanitizeInput(data.email),
-        subject: sanitizeInput(data.subject),
-        message: sanitizeInput(data.message)
-      };
-
       const response = await fetch("https://formspree.io/f/xdkdkopy", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json"
+          Accept: "application/json",
         },
-        body: JSON.stringify(sanitizedData)
+        body: JSON.stringify({
+          email: data.email,
+          message: `
+            Name: ${data.firstName} ${data.lastName}
+            Subject: ${data.subject}
+            Message: ${data.message}
+          `,
+        }),
       });
 
       if (response.ok) {
         toast({
           title: "Message sent successfully!",
-          description: "Thank you for your message. I'll get back to you soon."
+          description: "Thank you for your message. I'll get back to you soon.",
         });
         reset();
       } else {
-        throw new Error("Submission failed");
+        throw new Error("Formspree submission failed");
       }
-    } catch {
+    } catch (error) {
       toast({
         title: "Error sending message",
         description: "Please try again later.",
-        variant: "destructive"
+        variant: "destructive",
       });
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
-      <div className="grid md:grid-cols-2 gap-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium mb-2">First Name <span className="text-destructive">*</span></label>
-          <Input {...register('firstName')} placeholder="John" className={errors.firstName ? 'border-destructive' : ''} />
-          {errors.firstName && <p className="text-destructive text-sm mt-1">{errors.firstName.message}</p>}
+          <Label htmlFor="firstName">First Name</Label>
+          <Input id="firstName" {...register("firstName")} />
+          {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName.message}</p>}
         </div>
+
         <div>
-          <label className="block text-sm font-medium mb-2">Last Name <span className="text-destructive">*</span></label>
-          <Input {...register('lastName')} placeholder="Doe" className={errors.lastName ? 'border-destructive' : ''} />
-          {errors.lastName && <p className="text-destructive text-sm mt-1">{errors.lastName.message}</p>}
+          <Label htmlFor="lastName">Last Name</Label>
+          <Input id="lastName" {...register("lastName")} />
+          {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName.message}</p>}
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-2">Email <span className="text-destructive">*</span></label>
-        <Input type="email" {...register('email')} placeholder="john@example.com" className={errors.email ? 'border-destructive' : ''} />
-        {errors.email && <p className="text-destructive text-sm mt-1">{errors.email.message}</p>}
+        <Label htmlFor="email">Email</Label>
+        <Input id="email" type="email" {...register("email")} />
+        {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-2">Subject <span className="text-destructive">*</span></label>
-        <Input {...register('subject')} placeholder="Project Inquiry" className={errors.subject ? 'border-destructive' : ''} />
-        {errors.subject && <p className="text-destructive text-sm mt-1">{errors.subject.message}</p>}
+        <Label htmlFor="subject">Subject</Label>
+        <Input id="subject" {...register("subject")} />
+        {errors.subject && <p className="text-red-500 text-sm">{errors.subject.message}</p>}
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-2">Message <span className="text-destructive">*</span></label>
-        <Textarea {...register('message')} rows={5} placeholder="Tell me about your project..." className={errors.message ? 'border-destructive' : ''} />
-        {errors.message && <p className="text-destructive text-sm mt-1">{errors.message.message}</p>}
+        <Label htmlFor="message">Message</Label>
+        <Textarea id="message" rows={5} {...register("message")} />
+        {errors.message && <p className="text-red-500 text-sm">{errors.message.message}</p>}
       </div>
 
-      <Button type="submit" size="lg" disabled={isSubmitting} className="w-full bg-gradient-primary hover:shadow-glow disabled:opacity-50">
+      <Button type="submit" disabled={isSubmitting}>
         {isSubmitting ? "Sending..." : "Send Message"}
       </Button>
     </form>
   );
-};
+}
 
-export default ContactForm;
