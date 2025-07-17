@@ -66,7 +66,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section className="py-12 px-4 md:px-8 lg:px-16">
+    <section id="projects" className="py-12 px-4 md:px-8 lg:px-16">
       <div className="max-w-5xl mx-auto text-center">
         <h2 className="text-4xl font-bold mb-4">My Work</h2>
         <TextGenerateEffect words={words} className="text-lg text-muted-foreground mb-12" />
