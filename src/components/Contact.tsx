@@ -9,19 +9,19 @@ const contactInfo = [
   {
     icon: <Mail className="w-6 h-6 text-primary" />,
     title: 'Email',
-    content: 'your.email@example.com',
-    action: 'mailto:your.email@example.com',
+    content: 'menjiraini@gmail.com',
+    action: 'mailto:menjiraini@gmail.com',
   },
   {
     icon: <Phone className="w-6 h-6 text-primary" />,
     title: 'Phone',
-    content: '+1 (555) 123-4567',
-    action: 'tel:+15551234567',
+    content: '+254 700-463-600',
+    action: 'tel:+254700463600',
   },
   {
     icon: <MapPin className="w-6 h-6 text-primary" />,
     title: 'Location',
-    content: 'Your City, Country',
+    content: 'Nairobi, KE',
     action: null,
   },
 ];
