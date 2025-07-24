@@ -40,10 +40,10 @@ const About = () => {
             </h3>
 
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              As a passionate data analyst, I specialize in extracting meaningful insights 
-              from complex datasets. With a strong foundation in statistical analysis and 
-              data visualization, I help organizations make data-driven decisions that 
-              drive growth and efficiency.
+              As a passionate data analytics leader, I specialize in transforming complex datasets into
+              actionable insights that inform program performance, strategic decisions, and operational efficiency. 
+              I have a strong foundation in statistical analysis, data visualization, and 
+              reporting and have led the delivery of executive dashboards, board reports, and data products that align closely with cross-functional business needs.
             </p>
 
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
