@@ -1,157 +1,96 @@
+import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { Github, ExternalLink, BarChart3, TrendingUp, Database } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
+import { Code, Database, Palette, Smartphone } from "lucide-react";
 
-const words = `Projects & Dashboards that showcase my data leadership, analytics, and strategic thinking.`;
+const Skills = () => {
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
 
-const projects = [
-  {
-    title: "Data Strategy Blueprint for a Mid-Sized Company",
-    description:
-      "A comprehensive strategy to align data systems with business goals, improve data governance, and scale analytics operations.",
-    icon: <BarChart3 className="w-6 h-6 text-primary" />,
-    technologies: ["Strategy", "Data Governance", "Maturity Model"],
-    status: "Completed",
-    type: "Documentation",
-    github: "https://github.com/EricNjiraini/Data-Strategy-Blue-print-for-a-Mid-Sized-Company",
-    live: ""
-  },
-  {
-    title: "Executive Dashboard – From Data to Decision",
-    description:
-      "Power BI dashboard project designed for senior leadership to track KPIs, trends, and operational efficiency.",
-    icon: <BarChart3 className="w-6 h-6 text-primary" />,
-    technologies: ["Power BI", "DAX", "Data Modeling"],
-    status: "Completed",
-    type: "Dashboard",
-    github: "",
-    live: "https://app.powerbi.com/view?r=eyJrIjoiMzM3NzIyNmQtZDE5NC00OTk1LWIzNDktNDYzNTY1ZmYzZTA5IiwidCI6IjViMzAzNTE2LWYyYjEtNGZmNi05NmFkLTU5NDViNjM3MzZiMSIsImMiOjh9"
-  },
-  {
-    title: "Retail Data Analysis",
-    description:
-      "Exploratory analysis and insights generation from retail transaction data to inform merchandising decisions.",
-    icon: <TrendingUp className="w-6 h-6 text-primary" />,
-    technologies: ["R", "ggplot2", "Data Cleaning"],
-    status: "Completed",
-    type: "Analytics",
-    github: "https://github.com/EricNjiraini/Retail-Data-Analysis",
-    live: ""
-  },
-  {
-    title: "Data Governance Framework",
-    description:
-      "Framework for building strong data governance: ownership, stewardship, data quality, and policy enforcement.",
-    icon: <Database className="w-6 h-6 text-primary" />,
-    technologies: ["Governance", "Policy", "Framework"],
-    status: "Completed",
-    type: "Documentation",
-    github: "https://github.com/EricNjiraini/Data-Governance-Framework",
-    live: ""
-  },
-  {
-    title: "Sales and Operations Dashboard",
-    description:
-      "Dynamic Power BI dashboard for tracking sales volume, operations performance, and regional breakdowns.",
-    icon: <BarChart3 className="w-6 h-6 text-primary" />,
-    technologies: ["Power BI", "DAX", "Excel"],
-    status: "Completed",
-    type: "Dashboard",
-    github: "",
-    live: "https://app.powerbi.com/view?r=eyJrIjoiYTk1ZmQ4OWUtMDU5Yy00NWNjLWIyMzUtMmY4ZjBlODQxMzhlIiwidCI6IjViMzAzNTE2LWYyYjEtNGZmNi05NmFkLTU5NDViNjM3MzZiMSIsImMiOjh9"
-  }
-];
+  const item = {
+    hidden: { opacity: 0, y: 40 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  };
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }
-  },
-  hover: {
+  const hoverEffect = {
     scale: 1.05,
-    backgroundColor: "#E0F2FF", // light blue
-    transition: { type: "spring", stiffness: 200, damping: 15 }
-  }
-};
+    boxShadow: "0px 8px 25px rgba(59,130,246,0.4)",
+    transition: { type: "spring", stiffness: 200, damping: 15 },
+  };
 
-export default function Projects() {
+  const skills = [
+    {
+      icon: <Code className="w-8 h-8 text-blue-500" />,
+      title: "Frontend Development",
+      description: "Building responsive, interactive UIs with modern web tech.",
+    },
+    {
+      icon: <Database className="w-8 h-8 text-purple-500" />,
+      title: "Backend Development",
+      description: "Creating secure and efficient server-side applications.",
+    },
+    {
+      icon: <Palette className="w-8 h-8 text-pink-500" />,
+      title: "UI/UX Design",
+      description: "Designing clean, accessible, and intuitive user experiences.",
+    },
+    {
+      icon: <Smartphone className="w-8 h-8 text-green-500" />,
+      title: "Mobile Optimization",
+      description: "Ensuring seamless experiences across all device sizes.",
+    },
+  ];
+
   return (
-    <section id="projects" className="py-12 px-4 md:px-8 lg:px-16">
-      <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-4xl font-bold mb-4">My Work</h2>
-        <TextGenerateEffect words={words} className="text-lg text-muted-foreground mb-12" />
+    <section className="py-20 px-6" id="skills">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        className="max-w-6xl mx-auto"
+      >
+        <motion.h2
+          className="text-4xl font-bold mb-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Skills
+        </motion.h2>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, idx) => (
+        <motion.div
+          variants={container}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
+          {skills.map((skill, index) => (
             <motion.div
-              key={idx}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              whileHover="hover"
-              className="rounded-xl shadow-card overflow-hidden"
+              key={index}
+              variants={item}
+              whileHover={hoverEffect}
+              className="rounded-2xl overflow-hidden"
             >
-              <Card className="h-full">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    {project.icon}
-                    <h3 className="text-xl font-semibold">{project.title}</h3>
-                  </div>
-
-                  <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
-
-                  <div className="flex flex-wrap gap-2 text-xs mb-4">
-                    {project.technologies.map((tech, i) => (
-                      <span key={i} className="bg-muted text-muted-foreground px-2 py-1 rounded">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-3">
-                    {project.github && (
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="flex-1"
-                        onClick={() => window.open(project.github, "_blank")}
-                      >
-                        <Github size={16} className="mr-2" /> Code
-                      </Button>
-                    )}
-
-                    {project.live && (
-                      <Button
-                        size="sm"
-                        className="flex-1 bg-gradient-primary"
-                        onClick={() => window.open(project.live, "_blank")}
-                      >
-                        <ExternalLink size={16} className="mr-2" /> View
-                      </Button>
-                    )}
+              <Card className="p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-blue-400 transition-all">
+                <CardContent>
+                  <div className="flex flex-col items-center text-center gap-4">
+                    {skill.icon}
+                    <h3 className="text-xl font-semibold">{skill.title}</h3>
+                    <p className="text-sm opacity-80">{skill.description}</p>
                   </div>
                 </CardContent>
               </Card>
             </motion.div>
           ))}
-        </div>
-
-        <div className="mt-12">
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={() => window.open("https://github.com/EricNjiraini", "_blank")}
-          >
-            <Github className="mr-2" /> View All Repositories
-          </Button>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
-}
+};
+
+export default Skills;
