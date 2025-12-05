@@ -1,10 +1,10 @@
+import { motion } from "framer-motion";
 import { Github, ExternalLink, BarChart3, TrendingUp, Database } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
 
-const words = `Projects & Dashboards that showcase my data leadership, 
-analytics, and strategic thinking.`;
+const words = `Projects & Dashboards that showcase my data leadership, analytics, and strategic thinking.`;
 
 const projects = [
   {
@@ -64,68 +64,91 @@ const projects = [
   }
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }
+  },
+  hover: {
+    scale: 1.05,
+    backgroundColor: "#E0F2FF", // light blue
+    transition: { type: "spring", stiffness: 200, damping: 15 }
+  }
+};
+
 export default function Projects() {
   return (
     <section id="projects" className="py-12 px-4 md:px-8 lg:px-16">
       <div className="max-w-5xl mx-auto text-center">
         <h2 className="text-4xl font-bold mb-4">My Work</h2>
         <TextGenerateEffect words={words} className="text-lg text-muted-foreground mb-12" />
+
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, idx) => (
-            <Card key={idx} className="flex flex-col justify-between">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  {project.icon}
-                  <h3 className="text-xl font-semibold">{project.title}</h3>
-                </div>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 text-xs mb-4">
-                  {project.technologies.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="bg-muted text-muted-foreground px-2 py-1 rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex gap-3">
-                  {project.github && (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="flex-1"
-                      onClick={() => window.open(project.github, "_blank")}
-                    >
-                      <Github size={16} className="mr-2" />
-                      Code
-                    </Button>
-                  )}
-                  {project.live && (
-                    <Button
-                      size="sm"
-                      className="flex-1 bg-gradient-primary"
-                      onClick={() => window.open(project.live, "_blank")}
-                    >
-                      <ExternalLink size={16} className="mr-2" />
-                      View
-                    </Button>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+            <motion.div
+              key={idx}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              whileHover="hover"
+              className="rounded-xl shadow-card overflow-hidden"
+            >
+              <Card className="h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    {project.icon}
+                    <h3 className="text-xl font-semibold">{project.title}</h3>
+                  </div>
+
+                  <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
+
+                  <div className="flex flex-wrap gap-2 text-xs mb-4">
+                    {project.technologies.map((tech, i) => (
+                      <span key={i} className="bg-muted text-muted-foreground px-2 py-1 rounded">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-3">
+                    {project.github && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="flex-1"
+                        onClick={() => window.open(project.github, "_blank")}
+                      >
+                        <Github size={16} className="mr-2" /> Code
+                      </Button>
+                    )}
+
+                    {project.live && (
+                      <Button
+                        size="sm"
+                        className="flex-1 bg-gradient-primary"
+                        onClick={() => window.open(project.live, "_blank")}
+                      >
+                        <ExternalLink size={16} className="mr-2" /> View
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
+
         <div className="mt-12">
           <Button
             variant="outline"
             size="lg"
             onClick={() => window.open("https://github.com/EricNjiraini", "_blank")}
           >
-            <Github className="mr-2" />
-            View All Repositories
+            <Github className="mr-2" /> View All Repositories
           </Button>
         </div>
       </div>
