@@ -14,25 +14,33 @@
     <meta name="robots" content="index, follow" />
     <!-- Language (good for clarity) -->
     <meta name="language" content="en" />
-    <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self';" />
-    
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <!-- Security headers (CSP, nosniff, referrer) are served from vercel.json -->
+
+    <link rel="canonical" href="https://ericnjiraini.com/" />
 
     <meta property="og:title" content="Eric Njiraini Portfolio" />
     <meta property="og:description" content="Projects, dashboards, and case studies showcasing my data leadership and impact." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://ericnjiraini.github.io/me/" />
+    <meta property="og:url" content="https://ericnjiraini.com/" />
+    <meta property="og:image" content="https://ericnjiraini.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Eric Njiraini — Data Analytics Manager" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Eric Njiraini Portfolio" />
+    <meta name="twitter:description" content="Projects, dashboards, and case studies showcasing my data leadership and impact." />
+    <meta name="twitter:image" content="https://ericnjiraini.com/og-image.png" />
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Eric Njiraini",
-        "url": "https://ericnjiraini.github.io/me/",
+        "url": "https://ericnjiraini.com/",
+        "image": "https://ericnjiraini.com/og-image.png",
         "sameAs": [
-          "https://www.linkedin.com/in/ericnjiraini/",
+          "https://www.linkedin.com/in/eric-njiraini/",
           "https://github.com/EricNjiraini"
         ],
         "jobTitle": "Data Analytics Manager",

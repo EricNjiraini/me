@@ -21,7 +21,7 @@ const Hero = () => {
         <div className="animate-fade-in max-w-6xl mx-auto px-4">
 
           {/* SEO PRIMARY H1 */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent leading-snug">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent leading-snug pb-2">
             Data Analytics Manager
           </h1>
 
@@ -62,14 +62,20 @@ const Hero = () => {
 
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-16">
-            <Button variant="ghost" size="sm" className="hover:text-primary">
-              <Github size={24} />
+            <Button asChild variant="ghost" size="sm" className="hover:text-primary">
+              <a href="https://github.com/EricNjiraini" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <Github size={24} />
+              </a>
             </Button>
-            <Button variant="ghost" size="sm" className="hover:text-primary">
-              <Linkedin size={24} />
+            <Button asChild variant="ghost" size="sm" className="hover:text-primary">
+              <a href="https://www.linkedin.com/in/eric-njiraini/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <Linkedin size={24} />
+              </a>
             </Button>
-            <Button variant="ghost" size="sm" className="hover:text-primary">
-              <Mail size={24} />
+            <Button asChild variant="ghost" size="sm" className="hover:text-primary">
+              <a href="mailto:menjiraini@gmail.com" aria-label="Email">
+                <Mail size={24} />
+              </a>
             </Button>
           </div>
         </div>
