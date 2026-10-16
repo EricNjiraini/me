@@ -1,36 +1,50 @@
 import { motion } from "framer-motion";
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Code, Database, BarChart3, Brain } from 'lucide-react';
+import { Code, Database, BarChart3, Brain, Users, Shield } from 'lucide-react';
 import CountUp from 'react-countup';
 
 const Skills = () => {
   const skillCategories = [
     {
-      icon: <Code className="w-6 h-6 text-primary" />,
-      title: "Programming Languages",
-      skills: ["Python", "R", "SQL", "Pyspark", "AWS Lambda"],
+      icon: <Brain className="w-6 h-6 text-primary" />,
+      title: "Analytics & Strategy",
+      skills: ["Market Sizing", "Credit Risk Modelling", "Churn Prediction", "A/B Testing", "Statistical Analysis", "Time Series", "Geospatial Analysis"],
     },
     {
-      icon: <Database className="w-6 h-6 text-primary" />,
-      title: "Data Tools & Platforms",
-      skills: ["Tidyverse", "Pandas", "NumPy", "Jupyter", "AWS", "Docker", "Apache Spark"],
+      icon: <Code className="w-6 h-6 text-primary" />,
+      title: "Programming & Data",
+      skills: ["Python", "SQL", "R", "PySpark", "Pandas", "NumPy", "AWS Lambda"],
     },
     {
       icon: <BarChart3 className="w-6 h-6 text-primary" />,
-      title: "Visualization Tools",
-      skills: ["Tableau", "Power BI", "Plotly", "D3.js", "Metabase", "Domo"],
+      title: "BI & Visualisation",
+      skills: ["Power BI", "Tableau", "Metabase", "Domo", "Plotly", "D3.js", "Executive Dashboards"],
     },
     {
       icon: <Database className="w-6 h-6 text-primary" />,
-      title: "Data Warehousing",
-      skills: ["PostgreSQL", "Oracle", "Redshift"],
+      title: "Data Infrastructure",
+      skills: ["PostgreSQL", "Redshift", "Oracle", "Apache Spark", "AWS", "Docker", "Jupyter"],
     },
     {
-      icon: <Brain className="w-6 h-6 text-primary" />,
-      title: "Analytics & ML",
-      skills: ["Statistical Analysis", "Machine Learning", "A/B Testing", "Time Series", "Regression", "Classification", "Cloud Computing"],
+      icon: <Shield className="w-6 h-6 text-primary" />,
+      title: "Data Governance",
+      skills: ["Data Quality Frameworks", "Data Validation", "Intake Templates", "Cross-team Integration", "Documentation", "Data Stewardship"],
     },
+    {
+      icon: <Users className="w-6 h-6 text-primary" />,
+      title: "Leadership & Delivery",
+      skills: ["Team Management", "Stakeholder Communication", "Data Storytelling", "Cross-functional Collaboration", "Analyst Mentorship", "Roadmap Planning"],
+    },
+  ];
+
+  const stats = [
+    { value: 5, suffix: "+", label: "Years of Experience" },
+    { value: 20, suffix: "+", label: "Dashboards Built" },
+    { value: 5, suffix: "M+", label: "Business Impact ($)" },
+    { value: 5, suffix: "+", label: "Cross-functional Projects Led" },
+    { value: 30, suffix: "%", label: "Improvement in Reporting Efficiency" },
+    { value: 7, suffix: "", label: "Analysts Mentored" },
   ];
 
   const containerVariants = {
@@ -38,11 +52,7 @@ const Skills = () => {
     show: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-        staggerChildren: 0.12,
-      },
+      transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.12 },
     },
   };
 
@@ -67,7 +77,7 @@ const Skills = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-primary mx-auto mb-8"></div>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            A comprehensive toolkit for data analysis, visualization, and insights generation
+            From statistical modelling and BI infrastructure to governance frameworks and team leadership — built for analytics management.
           </p>
         </motion.div>
 
@@ -77,16 +87,16 @@ const Skills = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {skillCategories.map((category, index) => (
             <motion.div
               key={index}
               variants={cardVariants}
-              whileHover={{ scale: 1.05, translateY: -6 }}
+              whileHover={{ scale: 1.04, translateY: -5 }}
               transition={{ type: "spring", stiffness: 260, damping: 18 }}
             >
-              <Card className="hover:shadow-card transition-all duration-300 bg-card/80 backdrop-blur-sm cursor-pointer">
+              <Card className="hover:shadow-card transition-all duration-300 bg-card/80 backdrop-blur-sm cursor-pointer h-full">
                 <CardHeader className="pb-4">
                   <div className="flex items-center gap-3 mb-2">
                     {category.icon}
@@ -111,34 +121,21 @@ const Skills = () => {
           ))}
         </motion.div>
 
-        {/* Experience Summary */}
+        {/* Stats */}
         <motion.div
-          className="mt-16 grid md:grid-cols-3 lg:grid-cols-3 gap-8 text-center"
+          className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
         >
-          {[5, 20, 5, 5, 30, 7].map((num, i) => (
-            <motion.div
-              key={i}
-              variants={cardVariants}
-              className="animate-slide-up"
-            >
+          {stats.map((stat, i) => (
+            <motion.div key={i} variants={cardVariants}>
               <div className="text-4xl font-bold text-primary mb-2">
-                <CountUp end={num} duration={4} />
-                {i === 0 || i === 1 || i === 3 ? "+" : i === 4 ? "%" : ""}
+                <CountUp end={stat.value} duration={4} />
+                {stat.suffix}
               </div>
-              <div className="text-muted-foreground">
-                {[
-                  "Years of Experience",
-                  "Dashboards Built",
-                  "Business Impact Delivered ($M)",
-                  "Cross-Functional Projects Led",
-                  "Improvement in Reporting Efficiency",
-                  "Analysts Mentored",
-                ][i]}
-              </div>
+              <div className="text-muted-foreground text-sm">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
