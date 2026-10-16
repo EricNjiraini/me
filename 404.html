@@ -1,21 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="robots" content="noindex" />
-    <meta http-equiv="refresh" content="0; url=/me/" />
-    <script>
-      // Redirect all 404s to index.html but preserve the path
-      const redirect = () => {
-        const path = location.pathname.replace('/me', '');
-        const newUrl = '/me/?redirect=' + encodeURIComponent(path + location.search + location.hash);
-        location.replace(newUrl);
-      };
-      redirect();
-    </script>
-    <title>Redirecting...</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eric Njiraini has moved to ericnjiraini.com</title>
+    <link rel="canonical" href="https://ericnjiraini.com/" />
+    <meta http-equiv="refresh" content="0; url=https://ericnjiraini.com/" />
+    <script>location.replace("https://ericnjiraini.com/" + location.hash);</script>
   </head>
   <body>
-    <p>Redirecting to portfolio...</p>
+    <p>This portfolio has moved to <a href="https://ericnjiraini.com/">ericnjiraini.com</a>.</p>
   </body>
 </html>
