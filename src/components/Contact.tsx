@@ -49,7 +49,7 @@ const Contact = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 text-foreground">Get In Touch</h2>
           <div className="w-24 h-1 bg-gradient-primary mx-auto mb-6" />
           <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-            Hiring for analytics leadership, or need help turning your data into decisions? I'd like to hear from you.
+            Hiring for data, AI or analytics leadership, or need help turning your data into decisions? I'd like to hear from you.
           </p>
         </div>
 

@@ -1,12 +1,18 @@
 import { motion, type Variants } from "framer-motion";
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Code, Database, BarChart3, Brain, Users, Shield } from 'lucide-react';
+import { Code, Database, BarChart3, Brain, Users, Sparkles } from 'lucide-react';
 
 const skillCategories = [
   {
+    icon: <Sparkles className="w-6 h-6 text-primary" />,
+    title: "AI & Data Strategy",
+    skills: ["AI Strategy", "MLOps", "Data Strategy", "AWS Cloud Migration", "Cost Optimisation", "Resource Gap Analysis", "Roadmap Planning"],
+    featured: true,
+  },
+  {
     icon: <Brain className="w-6 h-6 text-primary" />,
-    title: "Analytics & Strategy",
+    title: "Analytics & Modelling",
     skills: ["Market Sizing (TAM/SAM/SOM)", "Credit Risk Modelling", "Churn & Survival Analysis", "A/B Testing", "Statistical Analysis", "Time Series", "Geospatial Analysis"],
   },
   {
@@ -21,18 +27,13 @@ const skillCategories = [
   },
   {
     icon: <Database className="w-6 h-6 text-primary" />,
-    title: "Data Infrastructure",
-    skills: ["PostgreSQL", "Redshift", "Oracle", "AWS", "AWS Lambda", "Apache Spark", "Docker", "MS Dynamics"],
-  },
-  {
-    icon: <Shield className="w-6 h-6 text-primary" />,
-    title: "Data Governance & Field Data",
-    skills: ["Data Quality Frameworks", "Validation & Monitoring", "Data Stewardship", "Documentation", "KoboCollect / ODK", "M&E Data Systems"],
+    title: "Cloud & Data Infrastructure",
+    skills: ["AWS", "AWS Lambda", "PostgreSQL", "Redshift", "Oracle", "Apache Spark", "Docker", "MS Dynamics"],
   },
   {
     icon: <Users className="w-6 h-6 text-primary" />,
-    title: "Leadership & Delivery",
-    skills: ["Team Leadership", "Stakeholder Communication", "Data Storytelling", "Data Literacy Training", "Analyst Mentorship", "Roadmap Planning"],
+    title: "Leadership & Governance",
+    skills: ["Team Building & Hiring", "Analyst Mentorship", "Stakeholder Communication", "Data Storytelling", "Data Literacy Training", "Data Quality Frameworks", "Data Stewardship", "KoboCollect / ODK"],
   },
 ];
 
@@ -67,7 +68,7 @@ const Skills = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-primary mx-auto mb-6"></div>
           <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-            From statistical modelling and BI infrastructure to governance frameworks and team leadership — built for analytics management.
+            From AI and data strategy to statistical modelling, BI and team leadership — built for analytics management.
           </p>
         </motion.div>
 
@@ -81,7 +82,11 @@ const Skills = () => {
         >
           {skillCategories.map((category) => (
             <motion.div key={category.title} variants={cardVariants}>
-              <Card className="hover:shadow-card transition-all duration-300 bg-card/80 backdrop-blur-sm h-full">
+              <Card
+                className={`hover:shadow-card transition-all duration-300 backdrop-blur-sm h-full ${
+                  category.featured ? 'border-primary/50 bg-primary/5' : 'bg-card/80'
+                }`}
+              >
                 <CardHeader className="p-5 sm:p-6 pb-3 sm:pb-4">
                   <div className="flex items-center gap-3">
                     {category.icon}
@@ -94,7 +99,9 @@ const Skills = () => {
                       <Badge
                         key={skill}
                         variant="secondary"
-                        className="hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+                        className={`hover:bg-primary hover:text-primary-foreground transition-colors duration-200 ${
+                          category.featured ? 'bg-primary/15' : ''
+                        }`}
                       >
                         {skill}
                       </Badge>

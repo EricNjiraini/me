@@ -3,7 +3,8 @@ import { Button } from '@/components/ui/button';
 import heroImage from '@/assets/hero-bg.jpg';
 import { profile, scrollToSection } from '@/lib/profile';
 
-const tools = ['Power BI', 'SQL', 'Python', 'R', 'Metabase', 'AWS'];
+// Key selling points first, then the core stack.
+const focusAreas = ['AI Strategy', 'MLOps', 'Data Strategy', 'AWS Cloud', 'Power BI', 'Python · SQL · R'];
 
 const Hero = () => {
   return (
@@ -39,23 +40,28 @@ const Hero = () => {
             Turning data into business decisions
           </p>
 
-          {/* Tool stack */}
-          <ul className="flex flex-wrap justify-center gap-2 mb-8" aria-label="Core tools">
-            {tools.map((tool) => (
+          {/* Focus areas */}
+          <ul className="flex flex-wrap justify-center gap-2 mb-8" aria-label="Focus areas">
+            {focusAreas.map((area, i) => (
               <li
-                key={tool}
-                className="px-3 py-1 rounded-full border border-primary/30 bg-card/70 text-sm font-medium text-foreground"
+                key={area}
+                className={`px-3 py-1 rounded-full border text-sm font-medium ${
+                  i < 4
+                    ? 'border-primary/50 bg-primary/10 text-foreground'
+                    : 'border-primary/30 bg-card/70 text-foreground'
+                }`}
               >
-                {tool}
+                {area}
               </li>
             ))}
           </ul>
 
           {/* Value proposition */}
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            I lead analytics at Burn Manufacturing, a clean cookstove maker and carbon developer
-            selling in 10+ African countries. I build the executive dashboards, KPI frameworks and data
-            pipelines that leadership uses to plan, catch risks early, and decide where to invest.
+            I lead analytics and drive data and AI strategy at Burn Manufacturing, a clean cookstove
+            maker and carbon developer in 10+ African countries. That means taking our data platform to
+            AWS, putting ML models into production, keeping data costs lean, and building the team and
+            dashboards leadership relies on.
           </p>
 
           {/* CTA */}

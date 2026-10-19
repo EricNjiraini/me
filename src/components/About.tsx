@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
-import { LayoutDashboard, Workflow, TrendingUp, ShieldCheck } from 'lucide-react';
+import { Sparkles, Cpu, CloudUpload, PiggyBank, Users, LayoutDashboard } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import CountUp from 'react-countup';
 import { useRef } from "react";
@@ -27,26 +27,37 @@ const itemVariants: Variants = {
   },
 };
 
+// Key selling points, in priority order.
 const highlights = [
+  {
+    icon: Sparkles,
+    title: "AI strategy",
+    description: "Identifying where AI and machine learning add real value, and setting the roadmap and guardrails to deliver it.",
+  },
+  {
+    icon: Cpu,
+    title: "MLOps",
+    description: "Taking models from notebook to production, with the deployment, monitoring and retraining that keep them reliable.",
+  },
+  {
+    icon: CloudUpload,
+    title: "Data strategy & AWS migration",
+    description: "Set the data strategy that led to moving our data platform to AWS, joining ERP, CRM, warehouse and field data.",
+  },
+  {
+    icon: PiggyBank,
+    title: "Cost optimisation",
+    description: "Running cost optimisation across our data systems so infrastructure and tooling spend tracks the value it delivers.",
+  },
+  {
+    icon: Users,
+    title: "Team building & mentoring",
+    description: "A resource gap analysis I led made the case for new analyst hires, and I mentor the team as it grows.",
+  },
   {
     icon: LayoutDashboard,
     title: "Executive dashboards & KPIs",
     description: "Power BI and Metabase reporting that leadership uses to track operations, supply and demand.",
-  },
-  {
-    icon: Workflow,
-    title: "Data pipelines & automation",
-    description: "Python, R and AWS pipelines that join ERP, CRM, warehouse and field data into one view.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Market & risk analytics",
-    description: "TAM/SAM/SOM market sizing, credit risk and churn models that guide where to invest.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Data quality & governance",
-    description: "Validation rules, monitoring and stewardship that keep critical datasets accurate.",
   },
 ];
 
@@ -96,84 +107,84 @@ const About = () => {
           <div className="w-24 h-1 bg-gradient-primary mx-auto" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center mb-12 md:mb-16">
+        {/* STORY */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl mx-auto mb-10 md:mb-14"
+        >
 
-          {/* LEFT COLUMN */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
+          <h3 className="text-xl sm:text-2xl font-semibold mb-5 text-foreground">
+            Data & AI strategy, MLOps and analytics leadership across Sub-Saharan Africa
+          </h3>
 
-            <h3 className="text-xl sm:text-2xl font-semibold mb-5 text-foreground">
-              Data analytics, Power BI & business intelligence across Sub-Saharan Africa
-            </h3>
+          <div className="space-y-4 text-muted-foreground text-base sm:text-lg leading-relaxed">
+            <p>
+              I'm a Data Analytics Manager in Nairobi. I've spent 9 years turning messy, multi-source
+              data into decisions, from field surveys to ERP systems. At Burn Manufacturing I lead
+              analytics for Commercial, Field Operations, Customer Experience and Logistics across a
+              multi-country network.
+            </p>
 
-            <div className="space-y-4 text-muted-foreground text-base sm:text-lg leading-relaxed">
-              <p>
-                I'm a Data Analytics Manager in Nairobi. I've spent 9 years turning messy, multi-source
-                data into decisions, from field surveys to ERP systems. At Burn Manufacturing I lead
-                analytics for Commercial, Field Operations, Customer Experience and Logistics across a
-                multi-country network.
-              </p>
+            <p>
+              I also shape where data and AI take the business. The data strategy I set led to our
+              migration to AWS. I run MLOps for the models we put into production and lead cost
+              optimisation across our data systems. A resource gap analysis I ran made the case for
+              growing the team, and I now mentor the analysts we hired.
+            </p>
 
-              <p>
-                Before Burn, I worked at Dalberg Research, designing field data collection and analysis for
-                programme evaluations across Africa. That grounding in international development still
-                shapes how I work: rigorous methods, clear communication for technical and non-technical
-                audiences, and data in service of community-level impact.
-              </p>
+            <p>
+              Before Burn, I designed field data collection and analysis for programme evaluations at
+              Dalberg Research. That grounding in international development still shapes how I work:
+              rigorous methods, clear communication, and data in service of community-level impact.
+              I'm completing an MSc in Data Science at the University of East London, on top of a BSc
+              in Statistics. Outside work, I hike.
+            </p>
+          </div>
 
-              <p>
-                I'm completing an MSc in Data Science at the University of East London, on top of a BSc in
-                Statistics. Outside of data work, I hike and stay involved in the data community.
-              </p>
-            </div>
+        </motion.div>
 
-          </motion.div>
+        {/* SELLING POINTS */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 md:mb-16"
+        >
+          {highlights.map((item) => (
+            <motion.div
+              key={item.title}
+              variants={itemVariants}
+              whileHover={{ y: -6 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Card className="hover:shadow-card transition-all duration-300 bg-gradient-card h-full">
+                <CardContent className="p-5 sm:p-6 flex sm:flex-col gap-4 sm:gap-3">
 
-          {/* RIGHT COLUMN */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid sm:grid-cols-2 gap-4 sm:gap-6"
-          >
-            {highlights.map((item) => (
-              <motion.div
-                key={item.title}
-                variants={itemVariants}
-                whileHover={{ y: -8, scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Card className="hover:shadow-card transition-all duration-300 bg-gradient-card h-full">
-                  <CardContent className="p-5 sm:p-6 flex sm:flex-col sm:text-center gap-4 sm:gap-0">
-
-                    <div className="shrink-0 self-start sm:self-auto sm:mb-4 flex sm:justify-center">
-                      <div className="p-2.5 rounded-lg bg-primary/10">
-                        <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
-                      </div>
+                  <div className="shrink-0 self-start">
+                    <div className="p-2.5 rounded-lg bg-primary/10">
+                      <item.icon className="w-6 h-6 text-primary" />
                     </div>
+                  </div>
 
-                    <div>
-                      <h4 className="font-semibold mb-1.5 text-foreground">
-                        {item.title}
-                      </h4>
+                  <div>
+                    <h4 className="font-semibold mb-1.5 text-foreground">
+                      {item.title}
+                    </h4>
 
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
 
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-
-        </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* Impact stats */}
         <motion.dl

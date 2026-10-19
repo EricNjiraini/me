@@ -26,8 +26,9 @@ const employers: Employer[] = [
         title: 'Data Analytics Manager',
         period: 'Nov 2025 – Present',
         points: [
-          'Lead analytics for Commercial, Field Operations, Customer Experience and Logistics across a multi-country network.',
-          'Own the executive dashboards and KPI frameworks leadership uses to track operational health, supply and demand.',
+          'Drive data and AI strategy: the data strategy I set led to migrating our data platform to AWS, and I run MLOps for models in production.',
+          'Lead cost optimisation across our data systems, and ran a resource gap analysis that led to hiring new analysts, whom I mentor.',
+          'Lead analytics for Commercial, Field Operations, Customer Experience and Logistics, and own the executive dashboards and KPI frameworks leadership runs on.',
           'Ran TAM/SAM/SOM market sizing for Nigeria, Zambia, Malawi and Ethiopia to guide entry and investment decisions.',
           'Set data quality and governance standards that hold critical datasets at 97% accuracy.',
         ],
