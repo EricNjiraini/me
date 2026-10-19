@@ -1,6 +1,6 @@
-import { ArrowDown, Download, Github, Linkedin, Mail, MapPin } from 'lucide-react';
+import { Download, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import heroImage from '@/assets/hero-bg.jpg';
+import heroImage from '@/assets/hero-bg.webp';
 import { profile, scrollToSection } from '@/lib/profile';
 
 // Capabilities only; individual tools live in the Skills section.
@@ -17,25 +17,30 @@ const Hero = () => {
       />
       <div className="absolute inset-0 bg-gradient-primary opacity-5" />
 
-      <div className="relative z-10 container mx-auto px-5 sm:px-6 pt-24 pb-16 md:pt-28 text-center">
+      <div className="relative z-10 container mx-auto px-5 sm:px-6 pt-20 sm:pt-24 pb-16 md:pt-28 text-center">
         <div className="animate-fade-in max-w-4xl mx-auto">
 
-          {/* Name + location */}
-          <p className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-sm sm:text-base font-medium text-foreground/80 mb-4">
-            <span className="font-semibold text-foreground">{profile.name}</span>
-            <span aria-hidden="true" className="text-primary">•</span>
-            <span className="inline-flex items-center gap-1">
-              <MapPin className="w-4 h-4 text-primary" aria-hidden="true" />
-              {profile.location}
-            </span>
-          </p>
+          {/* Headshot (also referenced by the JSON-LD in index.html) */}
+          <img
+            src="/eric-njiraini.webp"
+            alt={profile.name}
+            width={400}
+            height={400}
+            className="mx-auto mb-5 h-28 w-28 sm:h-36 sm:w-36 rounded-full object-cover ring-4 ring-primary/20 shadow-elegant"
+          />
 
-          {/* SEO PRIMARY H1 */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold mb-5 bg-gradient-primary bg-clip-text text-transparent leading-tight pb-2">
-            Data Analytics Manager
+          {/* SEO PRIMARY H1: name + role */}
+          <h1 className="mb-5">
+            <span className="block text-lg sm:text-2xl font-semibold text-foreground mb-2">
+              {profile.name}
+            </span>
+            <span className="sr-only">, </span>
+            <span className="block text-4xl sm:text-6xl md:text-7xl font-bold bg-gradient-primary bg-clip-text text-transparent leading-tight pb-2">
+              Data Analytics Manager
+            </span>
           </h1>
 
-          {/* Supporting SEO line */}
+          {/* Supporting line */}
           <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-6">
             Turning data into business decisions
           </p>
@@ -54,10 +59,10 @@ const Hero = () => {
 
           {/* Value proposition */}
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-            I lead analytics and drive data and AI strategy at Burn Manufacturing, a clean cookstove
-            maker and carbon developer in 10+ African countries. I set the data strategy that took our
-            platform to AWS, and today I put ML models into production, keep data costs lean, and build
-            the team and dashboards leadership relies on.
+            Based in Nairobi, I lead analytics and drive data and AI strategy at Burn Manufacturing, a
+            clean cookstove maker and carbon developer in 10+ African countries. I set the data strategy
+            that took our platform to AWS, and today I put ML models into production, keep data costs
+            lean, and build the team and dashboards leadership relies on.
           </p>
 
           {/* CTA */}
@@ -103,19 +108,6 @@ const Hero = () => {
             </Button>
           </div>
         </div>
-      </div>
-
-      {/* Scroll Indicator (desktop only; on phones it collides with the content) */}
-      <div className="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => scrollToSection('about')}
-          className="hover:text-primary"
-          aria-label="Scroll to About"
-        >
-          <ArrowDown className="!size-6" />
-        </Button>
       </div>
     </section>
   );

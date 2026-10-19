@@ -17,10 +17,11 @@ All colors MUST be HSL.
   --popover: 220 35% 16%;
   --popover-foreground: 210 40% 98%;
 
-  --primary: 160 84% 39%;
+  /* Deep emerald: 5.0:1 against white, so it passes WCAG AA for text and button labels. */
+  --primary: 160 84% 27%;
   --primary-foreground: 0 0% 100%;
 
-  --primary-glow: 173 80% 40%;
+  --primary-glow: 173 80% 27%;
 
   --secondary: 210 40% 96%;
   --secondary-foreground: 222 47% 11%;
@@ -46,7 +47,7 @@ All colors MUST be HSL.
 
   --border: 214 32% 91%;
   --input: 217 20% 24%;
-  --ring: 160 84% 39%;
+  --ring: 160 84% 27%;
 
   --radius: 0.75rem; 
   }
@@ -58,7 +59,7 @@ All colors MUST be HSL.
   --card: 0 0% 100%;
   --card-foreground: 222 47% 11%;
   
-  --primary: 160 84% 39%;
+  --primary: 160 84% 27%;
   --primary-foreground: 0 0% 100%;
   
   --accent: 198 93% 60%;

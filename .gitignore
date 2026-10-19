@@ -5,6 +5,7 @@ node_modules/
 
 # Build outputs (Vercel builds from source)
 dist
+dist-server
 docs
 
 # Vercel CLI

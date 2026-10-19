@@ -14,4 +14,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // The prerender build (src/entry-server.tsx) bundles its dependencies so Node
+  // doesn't trip over CommonJS/ESM interop when scripts/prerender.mjs imports it.
+  ssr: {
+    noExternal: true,
+  },
 });

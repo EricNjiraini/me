@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { Sparkles, Cpu, CloudUpload, PiggyBank, Users, LayoutDashboard } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import CountUp from 'react-countup';
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -80,6 +80,11 @@ const About = () => {
   });
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+
+  // The prerendered HTML shows the real figures (so crawlers don't read "0");
+  // the count-up animation only takes over once the page is running in a browser.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
     <section ref={sectionRef} id="about" className="py-16 md:py-24 bg-background relative overflow-hidden">
@@ -203,7 +208,11 @@ const About = () => {
               <dt className="text-muted-foreground text-xs sm:text-sm leading-snug">{stat.label}</dt>
               <dd className="text-3xl sm:text-4xl font-bold text-primary mb-1">
                 {stat.prefix}
-                <CountUp end={stat.value} duration={2.5} enableScrollSpy scrollSpyOnce />
+                {mounted ? (
+                  <CountUp end={stat.value} duration={2.5} enableScrollSpy scrollSpyOnce />
+                ) : (
+                  stat.value
+                )}
                 {stat.suffix}
               </dd>
             </motion.div>

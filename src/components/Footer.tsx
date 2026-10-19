@@ -6,7 +6,8 @@ const Footer = () => {
   return (
     <footer className="border-t border-border bg-background">
       <div className="container mx-auto px-5 sm:px-6 py-8 flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
-        <p className="text-sm text-muted-foreground text-center sm:text-left">
+        {/* suppressHydrationWarning: the prerendered year can lag the visitor's clock at New Year */}
+        <p className="text-sm text-muted-foreground text-center sm:text-left" suppressHydrationWarning>
           © {new Date().getFullYear()} {profile.name}
           <span className="hidden sm:inline"> · {profile.role}</span> · {profile.location}
         </p>

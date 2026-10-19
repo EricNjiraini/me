@@ -84,12 +84,8 @@ const Header = () => {
               Download CV
             </a>
 
-            {/* Animated Hire Me Button */}
-            <Button
-              className="ml-2 animate-pulse hover:animate-none transition-all duration-500"
-              style={{ animationDuration: '2.5s' }}
-              onClick={() => goTo('contact')}
-            >
+            {/* Hire Me Button */}
+            <Button className="ml-2" onClick={() => goTo('contact')}>
               Hire Me
             </Button>
           </div>
