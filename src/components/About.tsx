@@ -1,7 +1,64 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { BarChart3, Database, TrendingUp, Users } from 'lucide-react';
+import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import { LayoutDashboard, Workflow, TrendingUp, ShieldCheck } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import CountUp from 'react-countup';
 import { useRef } from "react";
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.4, 0.25, 1],
+    },
+  },
+};
+
+const highlights = [
+  {
+    icon: LayoutDashboard,
+    title: "Executive dashboards & KPIs",
+    description: "Power BI and Metabase reporting that leadership uses to track operations, supply and demand.",
+  },
+  {
+    icon: Workflow,
+    title: "Data pipelines & automation",
+    description: "Python, R and AWS pipelines that join ERP, CRM, warehouse and field data into one view.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Market & risk analytics",
+    description: "TAM/SAM/SOM market sizing, credit risk and churn models that guide where to invest.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Data quality & governance",
+    description: "Validation rules, monitoring and stewardship that keep critical datasets accurate.",
+  },
+];
+
+// Headline figures for the site; the CV (src/assets/Eric_Njiraini_Resume.pdf) carries the detail.
+const stats = [
+  { value: 9, prefix: "", suffix: "+", label: "Years working with data" },
+  { value: 5, prefix: "$", suffix: "M+", label: "Business impact" },
+  { value: 97, prefix: "", suffix: "%", label: "Accuracy on critical datasets" },
+  { value: 90, prefix: "", suffix: "%", label: "Of recurring reporting automated" },
+  { value: 20, prefix: "", suffix: "+", label: "Dashboards built for leadership" },
+  { value: 7, prefix: "", suffix: "", label: "Analysts mentored" },
+];
 
 const About = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -13,54 +70,8 @@ const About = () => {
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.4, 0.25, 1],
-      },
-    },
-  };
-
-  const highlights = [
-    {
-      icon: BarChart3,
-      title: "Data Visualization (Power BI & Tableau)",
-      description: "Creating dashboards and visual analytics that communicate business insights clearly",
-    },
-    {
-      icon: Database,
-      title: "Data Processing (SQL & Python)",
-      description: "Cleaning, transforming, and analyzing datasets for reporting and decision-making",
-    },
-    {
-      icon: TrendingUp,
-      title: "Statistical & Predictive Analysis",
-      description: "Applying analytics and modeling techniques to uncover trends and patterns",
-    },
-    {
-      icon: Users,
-      title: "Business Intelligence & Reporting",
-      description: "Translating data into executive dashboards and business recommendations",
-    },
-  ];
-
   return (
-    <section ref={sectionRef} id="about" className="py-20 bg-background relative overflow-hidden">
+    <section ref={sectionRef} id="about" className="py-16 md:py-24 bg-background relative overflow-hidden">
 
       {/* Background */}
       <motion.div style={{ y: backgroundY }} className="absolute inset-0 -z-10">
@@ -68,101 +79,93 @@ const About = () => {
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
       </motion.div>
 
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-5 sm:px-6">
 
-        {/* SECTION HEADER (SEO IMPROVED) */}
+        {/* SECTION HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 text-foreground">
             About Me
           </h2>
 
-          <div className="w-24 h-1 bg-gradient-primary mx-auto mb-8"></div>
+          <div className="w-24 h-1 bg-gradient-primary mx-auto" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center mb-12 md:mb-16">
 
-          {/* LEFT COLUMN (SEO-HEAVY TEXT) */}
+          {/* LEFT COLUMN */}
           <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
 
-            <h3 className="text-2xl font-semibold mb-6 text-foreground">
-              Data Analytics, Power BI & Business Intelligence Specialist
+            <h3 className="text-xl sm:text-2xl font-semibold mb-5 text-foreground">
+              Data analytics, Power BI & business intelligence across Sub-Saharan Africa
             </h3>
 
-            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              I am a Data Analytics Manager based in Kenya, specializing in Power BI, AWS-Cloud computing, SQL, Python, and R, with a focus on building scalable analytics systems that support executive decision-making and business strategy.
-			  I work with cross-functional teams to design executive dashboards, KPI frameworks, and reporting systems that give leadership real-time visibility into business performance.
-			  My work sits at the intersection of data, operations, and strategy — transforming raw data into structured decision intelligence used across organizations.
-            </p>
+            <div className="space-y-4 text-muted-foreground text-base sm:text-lg leading-relaxed">
+              <p>
+                I'm a Data Analytics Manager in Nairobi. I've spent 9 years turning messy, multi-source
+                data into decisions, from field surveys to ERP systems. At Burn Manufacturing I lead
+                analytics for Commercial, Field Operations, Customer Experience and Logistics across a
+                multi-country network.
+              </p>
 
-            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              I have experience building executive dashboards, automated reports, and data pipelines
-              that support business intelligence and strategic planning across cross-functional teams.
-            </p>
+              <p>
+                Before Burn, I worked at Dalberg Research, designing field data collection and analysis for
+                programme evaluations across Africa. That grounding in international development still
+                shapes how I work: rigorous methods, clear communication for technical and non-technical
+                audiences, and data in service of community-level impact.
+              </p>
 
-            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              🧠 Tools I work with:
-              <br />• Python 🐍 for data analysis and automation
-              <br />• SQL ⚙️ for querying and data transformation
-              <br />• Power BI & Tableau 📊 for dashboards and visualization
-              <br />• R 📈 for statistical analysis
-            </p>
-
-            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              🚀 I continuously improve my skills in data analytics, machine learning,
-              and business intelligence to stay current in the evolving data landscape.
-            </p>
-
-            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              ⛰️ Outside of data work, I enjoy hiking, learning new technologies,
-              and engaging with the global data community.
-            </p>
+              <p>
+                I'm completing an MSc in Data Science at the University of East London, on top of a BSc in
+                Statistics. Outside of data work, I hike and stay involved in the data community.
+              </p>
+            </div>
 
           </motion.div>
 
-          {/* RIGHT COLUMN (UNCHANGED VISUAL STYLE) */}
+          {/* RIGHT COLUMN */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-2 gap-6"
+            className="grid sm:grid-cols-2 gap-4 sm:gap-6"
           >
-            {highlights.map((item, index) => (
+            {highlights.map((item) => (
               <motion.div
-                key={index}
+                key={item.title}
                 variants={itemVariants}
                 whileHover={{ y: -8, scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <Card className="hover:shadow-card transition-all duration-300 bg-gradient-card">
-                  <CardContent className="p-6 text-center">
+                <Card className="hover:shadow-card transition-all duration-300 bg-gradient-card h-full">
+                  <CardContent className="p-5 sm:p-6 flex sm:flex-col sm:text-center gap-4 sm:gap-0">
 
-                    <motion.div
-                      className="mb-4 flex justify-center"
-                      whileHover={{ rotate: [0, -10, 10, 0] }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <item.icon className="w-8 h-8 text-primary" />
-                    </motion.div>
+                    <div className="shrink-0 self-start sm:self-auto sm:mb-4 flex sm:justify-center">
+                      <div className="p-2.5 rounded-lg bg-primary/10">
+                        <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
+                      </div>
+                    </div>
 
-                    <h4 className="font-semibold mb-2 text-foreground">
-                      {item.title}
-                    </h4>
+                    <div>
+                      <h4 className="font-semibold mb-1.5 text-foreground">
+                        {item.title}
+                      </h4>
 
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {item.description}
-                    </p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
 
                   </CardContent>
                 </Card>
@@ -171,6 +174,30 @@ const About = () => {
           </motion.div>
 
         </div>
+
+        {/* Impact stats */}
+        <motion.dl
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6"
+        >
+          {stats.map((stat) => (
+            <motion.div
+              key={stat.label}
+              variants={itemVariants}
+              className="rounded-xl border border-border bg-card/80 p-4 sm:p-6 text-center flex flex-col-reverse justify-end"
+            >
+              <dt className="text-muted-foreground text-xs sm:text-sm leading-snug">{stat.label}</dt>
+              <dd className="text-3xl sm:text-4xl font-bold text-primary mb-1">
+                {stat.prefix}
+                <CountUp end={stat.value} duration={2.5} enableScrollSpy scrollSpyOnce />
+                {stat.suffix}
+              </dd>
+            </motion.div>
+          ))}
+        </motion.dl>
       </div>
     </section>
   );

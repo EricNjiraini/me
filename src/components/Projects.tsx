@@ -1,10 +1,12 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
-  ExternalLink, TrendingUp, MapPin,
-  LayoutDashboard, ShieldCheck, GitMerge, Activity
+  ArrowRight, ExternalLink, Github, Globe2, TrendingUp, MapPin,
+  LayoutDashboard, ShieldCheck, GitMerge, Activity, Sigma
 } from 'lucide-react';
 import { ReactNode } from 'react';
+import { profile } from '@/lib/profile';
 
 // ── SVG Thumbnails (UNCHANGED for UI consistency) ────────────────────────────
 
@@ -211,6 +213,77 @@ const TeamProductivityThumbnail = () => (
   </svg>
 );
 
+// 7. Africa SDG Scorecard — country × goal heatmap + regional averages
+const sdgGoals = [1, 2, 3, 4, 7, 8, 13];
+const sdgRows = [
+  { code: 'KEN', v: [0.6, 0.5, 0.7, 0.8, 0.7, 0.6, 0.9] },
+  { code: 'RWA', v: [0.4, 0.5, 0.8, 0.7, 0.5, 0.8, 0.9] },
+  { code: 'GHA', v: [0.7, 0.8, 0.6, 0.7, 0.8, 0.5, 0.7] },
+  { code: 'NGA', v: [0.3, 0.4, 0.3, 0.5, 0.6, 0.4, 0.8] },
+  { code: 'ETH', v: [0.5, 0.3, 0.6, 0.4, 0.3, 0.8, 0.9] },
+  { code: 'ZAF', v: [0.8, 0.7, 0.6, 0.9, 0.9, 0.3, 0.2] },
+];
+const sdgCell = (v: number) => (v >= 0.66 ? '#22c55e' : v >= 0.4 ? '#f59e0b' : '#ef4444');
+
+const SdgThumbnail = () => (
+  <svg viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <rect width="320" height="140" rx="8" fill="#0b1120" />
+    <text x="12" y="16" fill="#64748b" fontSize="8" fontFamily="monospace">SDG SCORECARD · 2015–2030</text>
+    {sdgGoals.map((g, j) => (
+      <text key={g} x={58 + j * 21} y="30" fill="#94a3b8" fontSize="7.5" fontFamily="monospace" textAnchor="middle">{g}</text>
+    ))}
+    {sdgRows.map((row, i) => (
+      <g key={row.code}>
+        <text x="12" y={44 + i * 16} fill="#94a3b8" fontSize="8" fontFamily="monospace">{row.code}</text>
+        {row.v.map((v, j) => (
+          <rect key={j} x={49 + j * 21} y={35 + i * 16} width="18" height="12" rx="2"
+            fill={sdgCell(v)} opacity={0.35 + v * 0.55} />
+        ))}
+      </g>
+    ))}
+    <text x="214" y="30" fill="#94a3b8" fontSize="7.5" fontFamily="monospace">REGIONAL AVG</text>
+    {[
+      { label: 'North',   val: 71 },
+      { label: 'South',   val: 66 },
+      { label: 'East',    val: 62 },
+      { label: 'West',    val: 54 },
+      { label: 'Central', val: 47 },
+    ].map((d, i) => (
+      <g key={d.label}>
+        <text x="214" y={46 + i * 16} fill="#64748b" fontSize="7.5" fontFamily="monospace">{d.label}</text>
+        <rect x="254" y={38 + i * 16} width={d.val * 0.75} height="9" rx="2" fill="#38bdf8" opacity={0.85 - i * 0.1} />
+      </g>
+    ))}
+    <text x="214" y="132" fill="#22c55e" fontSize="7.5" fontFamily="monospace" opacity="0.7">54 COUNTRIES × 7 GOALS</text>
+  </svg>
+);
+
+// 8. Verification sample size — Monte Carlo spread narrowing as n grows
+const mcPoints = (() => {
+  let seed = 11;
+  const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  return Array.from({ length: 70 }, (_, i) => {
+    const t = i / 69;
+    const spread = 34 * (1 - t) + 4;
+    return { x: 24 + t * 240, y: 58 + (rand() - 0.5) * 2 * spread };
+  });
+})();
+
+const MonteCarloThumbnail = () => (
+  <svg viewBox="0 0 280 110" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <rect width="280" height="110" rx="8" fill="#0c0f1d" />
+    <text x="12" y="13" fill="#64748b" fontSize="8" fontFamily="monospace">VERIFICATION RATE vs SAMPLE SIZE</text>
+    <path d="M24,20 Q140,50 264,54" fill="none" stroke="#a78bfa" strokeOpacity="0.5" strokeDasharray="3,2" />
+    <path d="M24,96 Q140,66 264,62" fill="none" stroke="#a78bfa" strokeOpacity="0.5" strokeDasharray="3,2" />
+    <line x1="24" y1="58" x2="264" y2="58" stroke="#22d3ee" strokeOpacity="0.6" strokeWidth="1" />
+    {mcPoints.map((p, i) => (
+      <circle key={i} cx={p.x} cy={p.y} r="1.8" fill="#c4b5fd" opacity="0.75" />
+    ))}
+    <text x="24" y="106" fill="#475569" fontSize="7" fontFamily="monospace">n = 30</text>
+    <text x="264" y="106" fill="#475569" fontSize="7" fontFamily="monospace" textAnchor="end">n = 1,000</text>
+  </svg>
+);
+
 // ── TYPES ────────────────────────────────────────────────────────────────────
 
 interface Project {
@@ -220,89 +293,122 @@ interface Project {
   description: string;
   tags: string[];
   url: string;
+  demo?: string;
   icon: ReactNode;
   thumbnail: ReactNode;
+  thumbBg: string; // matches the thumbnail's own background so letterboxing is seamless
   featured?: boolean;
 }
 
-// ── PROJECT DATA (SEO-OPTIMIZED COPY) ────────────────────────────────────────
+// ── PROJECT DATA ─────────────────────────────────────────────────────────────
 
 const projects: Project[] = [
   {
-    id: '1',
-    name: 'PayGo Market Entry Analysis (Credit Risk & Market Sizing)',
-    tagline: 'End-to-end data analytics simulation for energy finance decisions',
+    id: 'paygo',
+    name: 'PayGo Cookstove Market Entry',
+    tagline: 'Market sizing, credit risk and churn for a four-country launch',
     description:
-      'A full data analytics system combining market sizing, credit risk modeling, and churn prediction using Python and statistical methods. Built to simulate a real-world PayGo energy company market entry decision pipeline and support data-driven investment strategy.',
-    tags: ['Python', 'SQL', 'Credit Risk Modeling', 'Churn Prediction', 'Market Sizing'],
-    url: 'https://github.com/EricNjiraini/paygo-market-entry',
+      'Three linked models for a PayGo cookstove company choosing between Kenya, Uganda, Tanzania and Ethiopia: a market-entry scorecard built on DHS, Findex and GSMA data, a default-risk model (logistic regression, random forest, XGBoost), and survival-based churn prediction. The customer ledger is simulated from GOGLA benchmarks.',
+    tags: ['Python', 'XGBoost', 'Survival Analysis', 'Market Sizing', 'Geospatial'],
+    url: `${profile.github}/paygo-cookstove-market-entry`,
     icon: <TrendingUp className="w-5 h-5" />,
     thumbnail: <PayGoThumbnail />,
+    thumbBg: '#0f0f1a',
     featured: true,
   },
   {
-    id: '2',
-    name: 'Kenya Clean Cooking Gap Analysis (Geospatial Data Study)',
-    tagline: 'County-level energy access and policy impact analysis',
+    id: 'sdg',
+    name: 'Africa SDG Scorecard',
+    tagline: 'Live dashboard: 54 countries × 7 Sustainable Development Goals',
     description:
-      'A geospatial data analytics project that maps and quantifies clean cooking access gaps across Kenya at county level. Built using Python to identify underserved regions and support policy makers, investors, and energy access programs.',
-    tags: ['Geospatial Analysis', 'Python', 'Data Visualization', 'Energy Access', 'Policy Analytics'],
-    url: 'https://github.com/EricNjiraini/kenya-clean-cooking-gap',
+      'An interactive scorecard tracking progress on 7 SDGs across all 54 African countries from 2015 to 2030, built on UN, World Bank, WHO, FAO and UNESCO open data. It includes a sortable heatmap, charts, country deep-dives and written analysis.',
+    tags: ['React', 'Python', 'Recharts', 'Open Data', 'SDGs'],
+    url: `${profile.github}/africa-sdg-scorecard`,
+    demo: 'https://africa-sdg-scorecard.vercel.app',
+    icon: <Globe2 className="w-5 h-5" />,
+    thumbnail: <SdgThumbnail />,
+    thumbBg: '#0b1120',
+    featured: true,
+  },
+  {
+    id: 'clean-cooking',
+    name: 'Kenya Clean Cooking Gap',
+    tagline: 'County-level geospatial study using DHS 2022 data',
+    description:
+      "Maps clean cooking access across Kenya's 47 counties. Electricity reaches 77% of households, yet only about 31% cook with clean fuels. The analysis ranks counties by access deficit and shows where LPG expansion and e-cooking pilots would do the most good per unit of capital.",
+    tags: ['Python', 'GeoPandas', 'DHS 2022', 'Geospatial Analysis', 'Energy Access'],
+    url: `${profile.github}/kenya-clean-cooking-gap`,
     icon: <MapPin className="w-5 h-5" />,
     thumbnail: <CleanCookingThumbnail />,
+    thumbBg: '#0a1628',
     featured: true,
   },
   {
-    id: '3',
-    name: 'Executive Insights Dashboard (Power BI Business Intelligence)',
-    tagline: 'Executive-level reporting and decision intelligence system',
+    id: 'exec-dashboard',
+    name: 'Executive Insights Dashboard',
+    tagline: 'From raw data to a boardroom-ready story',
     description:
-      'A Power BI business intelligence dashboard designed for executive reporting and strategic decision-making. Converts raw operational data into clear insights for performance tracking, business analysis, and leadership reporting.',
-    tags: ['Power BI', 'Business Intelligence', 'Data Visualization', 'Executive Reporting'],
-    url: 'https://github.com/EricNjiraini/executive-dashboard',
+      'A data storytelling project that turns sales, customer, product and regional data into a KPI dashboard and a five-slide strategy deck, with views tailored to the CEO, COO, CMO and CFO.',
+    tags: ['Power BI', 'R', 'Data Storytelling', 'Executive Reporting'],
+    url: `${profile.github}/Executive-Dashboard--From-Data-to-Decision`,
     icon: <LayoutDashboard className="w-5 h-5" />,
     thumbnail: <ExecDashThumbnail />,
+    thumbBg: '#0c1220',
     featured: true,
   },
   {
-    id: '4',
-    name: 'Data Governance Framework (Enterprise Data Management System)',
-    tagline: 'Organizational data quality and governance system',
+    id: 'governance',
+    name: 'Data Governance Framework',
+    tagline: 'Policies, stewardship and quality rules, ready to adopt',
     description:
-      'An enterprise data governance framework designed to improve data quality, consistency, security, and usability across teams. Defines standards, validation rules, and stewardship processes for scalable analytics environments.',
-    tags: ['Data Governance', 'Data Management', 'Documentation', 'Enterprise Systems'],
-    url: 'https://github.com/EricNjiraini/data-governance-framework',
+      'A governance kit covering data policies, a stewardship RACI matrix, quality rules, a compliance checklist, data dictionary templates and monitoring scripts for schema drift.',
+    tags: ['Data Governance', 'Data Quality', 'Stewardship', 'Compliance'],
+    url: `${profile.github}/Data-Governance-Framework`,
     icon: <ShieldCheck className="w-5 h-5" />,
     thumbnail: <GovernanceThumbnail />,
-    featured: true,
+    thumbBg: '#0d0d1f',
   },
   {
-    id: '5',
-    name: 'Data Quality & Integration Framework (SQL & Python)',
-    tagline: 'Cross-team data validation and integration system',
+    id: 'data-quality',
+    name: 'Data Quality & Integration',
+    tagline: 'Validation and onboarding across teams',
     description:
-      'A data engineering and analytics framework for ensuring data quality across multiple teams. Includes validation logic, SQL pipelines, and Python-based automation for reliable and consistent data integration.',
-    tags: ['Data Quality', 'SQL', 'Python', 'Data Integration', 'Automation'],
-    url: 'https://github.com/EricNjiraini/data-quality-integration',
+      'SQL and R validation scripts plus intake and mapping templates that let new teams plug into shared reporting without breaking it.',
+    tags: ['SQL', 'R', 'Data Validation', 'Data Integration'],
+    url: `${profile.github}/Data-Quality-and-Integration-Across-Teams`,
     icon: <GitMerge className="w-5 h-5" />,
     thumbnail: <DataQualityThumbnail />,
+    thumbBg: '#0f172a',
   },
   {
-    id: '6',
-    name: 'Data Team Productivity Analytics (KPIs & Dashboards)',
-    tagline: 'Measuring and optimizing analytics team performance',
+    id: 'monte-carlo',
+    name: 'Verification Sample Size Simulation',
+    tagline: 'Monte Carlo study of sampling stability',
     description:
-      'A KPI-driven analytics framework that measures data team productivity using dashboards, performance metrics, and reporting systems. Helps organizations track efficiency, backlog health, and delivery performance.',
-    tags: ['KPIs', 'Analytics', 'Dashboards', 'Performance Metrics', 'Reporting'],
-    url: 'https://github.com/EricNjiraini/data-team-productivity',
+      "An R simulation that finds the smallest sample that gives a stable sales verification rate, by resampling each agent's records at increasing sizes and testing how the variance shrinks.",
+    tags: ['R', 'Monte Carlo', 'data.table', 'Sampling'],
+    url: `${profile.github}/Sample-Size-vs-Verification-Outcome-Monte-Carlo-Simulation`,
+    icon: <Sigma className="w-5 h-5" />,
+    thumbnail: <MonteCarloThumbnail />,
+    thumbBg: '#0c0f1d',
+  },
+  {
+    id: 'team-productivity',
+    name: 'Data Team Productivity Tracker',
+    tagline: 'KPIs for running a data team',
+    description:
+      'A framework for measuring a data team on velocity, on-time delivery, quality and utilisation, with Power BI and Smartsheet dashboard guides and a weekly report template.',
+    tags: ['KPIs', 'Power BI', 'Smartsheet', 'Team Performance'],
+    url: `${profile.github}/Data-Team-Productivity-Tracker`,
     icon: <Activity className="w-5 h-5" />,
     thumbnail: <TeamProductivityThumbnail />,
+    thumbBg: '#071122',
   },
 ];
 
 // ── ANIMATION VARIANTS ───────────────────────────────────────────────────────
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
   show: {
     opacity: 1,
@@ -311,10 +417,72 @@ const containerVariants = {
   },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0 },
 };
+
+// ── CARD ─────────────────────────────────────────────────────────────────────
+
+const ProjectCard = ({ project, compact = false }: { project: Project; compact?: boolean }) => (
+  <motion.article
+    variants={cardVariants}
+    whileHover={{ y: -4 }}
+    transition={{ type: "spring", stiffness: 260, damping: 18 }}
+    className={`${compact ? 'bg-card/60' : 'bg-card/80 backdrop-blur-sm'} border border-border rounded-xl overflow-hidden flex flex-col h-full hover:shadow-card transition-shadow`}
+  >
+    <div
+      className={`w-full ${compact ? 'aspect-[28/11] max-h-36' : 'aspect-[16/7] max-h-56'}`}
+      style={{ backgroundColor: project.thumbBg }}
+      aria-hidden="true"
+    >
+      {project.thumbnail}
+    </div>
+
+    <div className={`${compact ? 'p-5' : 'p-5 sm:p-6'} flex flex-col flex-1`}>
+      <div className="flex items-start gap-3 mb-2">
+        <div className={`${compact ? 'p-1.5 rounded-md' : 'p-2 rounded-lg'} bg-primary/10 text-primary shrink-0`}>
+          {project.icon}
+        </div>
+        <h3 className={`${compact ? 'text-lg font-semibold' : 'text-xl font-bold'} text-foreground leading-snug pt-0.5`}>
+          {project.name}
+        </h3>
+      </div>
+
+      <p className={`${compact ? 'text-xs' : 'text-sm'} text-primary font-medium mb-3`}>
+        {project.tagline}
+      </p>
+
+      <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+        {project.description}
+      </p>
+
+      <div className="flex flex-wrap gap-2 mb-5">
+        {project.tags.map((tag) => (
+          <Badge key={tag} variant="secondary" className="text-xs">
+            {tag}
+          </Badge>
+        ))}
+      </div>
+
+      {/* Actions: full-size tap targets */}
+      <div className="mt-auto flex flex-wrap gap-2">
+        {project.demo && (
+          <Button asChild className="h-10 flex-1 sm:flex-none">
+            <a href={project.demo} target="_blank" rel="noopener noreferrer">
+              <ExternalLink /> Live demo
+            </a>
+          </Button>
+        )}
+        <Button asChild variant="outline" className="h-10 flex-1 sm:flex-none">
+          <a href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`View code for ${project.name} on GitHub`}>
+            <Github /> View code
+          </a>
+        </Button>
+      </div>
+    </div>
+  </motion.article>
+);
 
 // ── COMPONENT ────────────────────────────────────────────────────────────────
 
@@ -323,27 +491,27 @@ const Projects = () => {
   const others = projects.filter((p) => !p.featured);
 
   return (
-    <section id="projects" className="py-20 bg-background">
+    <section id="projects" className="py-16 md:py-24 bg-gradient-subtle">
 
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-5 sm:px-6">
 
-        {/* HEADER (SEO IMPROVED) */}
+        {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-5 text-foreground">
             Data Analytics Projects & Case Studies
           </h2>
 
-          <div className="w-24 h-1 bg-gradient-primary mx-auto mb-8" />
+          <div className="w-24 h-1 bg-gradient-primary mx-auto mb-6" />
 
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Data analytics case studies, dashboards, and frameworks built with Python, SQL, Power BI,
-            and data governance principles to support business decision-making and operational insights.
+          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
+            Case studies, dashboards and frameworks built with Python, R, SQL and Power BI, mostly drawn
+            from clean energy and international development.
           </p>
         </motion.div>
 
@@ -352,124 +520,35 @@ const Projects = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid md:grid-cols-2 gap-8 mb-10"
+          viewport={{ once: true, amount: 0.05 }}
+          className="grid md:grid-cols-2 gap-5 sm:gap-8 mb-8 md:mb-10"
         >
           {featured.map((project) => (
-            <motion.div
-              key={project.id}
-              variants={cardVariants}
-              whileHover={{ scale: 1.02, translateY: -4 }}
-              transition={{ type: "spring", stiffness: 260, damping: 18 }}
-              className="bg-card/80 backdrop-blur-sm border border-border rounded-xl overflow-hidden flex flex-col"
-            >
-              <div className="w-full h-36 overflow-hidden">
-                {project.thumbnail}
-              </div>
-
-              <div className="p-6 flex flex-col flex-1 justify-between">
-
-                <div>
-                  <div className="flex items-start justify-between mb-2">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                        {project.icon}
-                      </div>
-                      <h3 className="text-xl font-bold text-foreground">
-                        {project.name}
-                      </h3>
-                    </div>
-
-                    <a href={project.url} target="_blank" rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors">
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </div>
-
-                  <p className="text-sm text-primary font-medium mb-3">
-                    {project.tagline}
-                  </p>
-
-                  <p className="text-sm text-muted-foreground mb-5 leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary"
-                      className="text-xs hover:bg-primary hover:text-primary-foreground transition-colors">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-
-              </div>
-            </motion.div>
+            <ProjectCard key={project.id} project={project} />
           ))}
         </motion.div>
 
         {/* SECONDARY PROJECTS */}
+        <h3 className="text-lg font-semibold text-foreground mb-4">More frameworks & experiments</h3>
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          viewport={{ once: true, amount: 0.05 }}
+          className="grid md:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-6"
         >
           {others.map((project) => (
-            <motion.div
-              key={project.id}
-              variants={cardVariants}
-              whileHover={{ scale: 1.02, translateY: -3 }}
-              transition={{ type: "spring", stiffness: 260, damping: 18 }}
-              className="bg-card/60 border border-border rounded-xl overflow-hidden flex flex-col"
-            >
-              <div className="w-full h-24 overflow-hidden">
-                {project.thumbnail}
-              </div>
-
-              <div className="p-5 flex flex-col flex-1 justify-between">
-
-                <div>
-                  <div className="flex items-start justify-between mb-1">
-                    <div className="flex items-center gap-2">
-                      <div className="p-1.5 rounded-md bg-primary/10 text-primary">
-                        {project.icon}
-                      </div>
-                      <h3 className="text-lg font-semibold text-foreground">
-                        {project.name}
-                      </h3>
-                    </div>
-
-                    <a href={project.url} target="_blank" rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors">
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </div>
-
-                  <p className="text-xs text-primary font-medium mb-2">
-                    {project.tagline}
-                  </p>
-
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary"
-                      className="text-xs hover:bg-primary hover:text-primary-foreground transition-colors">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-
-              </div>
-            </motion.div>
+            <ProjectCard key={project.id} project={project} compact />
           ))}
         </motion.div>
+
+        <div className="text-center mt-10">
+          <Button asChild variant="ghost" size="lg" className="hover:text-primary">
+            <a href={`${profile.github}?tab=repositories`} target="_blank" rel="noopener noreferrer">
+              All repositories on GitHub <ArrowRight />
+            </a>
+          </Button>
+        </div>
 
       </div>
     </section>

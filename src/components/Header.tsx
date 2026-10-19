@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Download, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import resumePdf from '@/assets/Eric_Njiraini_Resume.pdf';
+import { navSections, profile, scrollToSection } from '@/lib/profile';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,46 +12,54 @@ const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      // Scrollspy logic
-      const sections = ['about', 'skills', 'projects', 'contact'];
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 80 && rect.bottom >= 80) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
+      // Scrollspy logic (nothing active while in the hero)
+      const current = navSections.find((section) => {
+        const rect = document.getElementById(section)?.getBoundingClientRect();
+        return rect && rect.top <= 80 && rect.bottom >= 80;
+      });
+      setActiveSection(current ?? '');
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  // Close the mobile menu with Escape
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setIsMenuOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isMenuOpen]);
+
+  const goTo = (id: string) => {
+    scrollToSection(id);
     setIsMenuOpen(false);
   };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background/90 backdrop-blur-md shadow-card' : 'bg-transparent'
+        isScrolled || isMenuOpen ? 'bg-background/95 backdrop-blur-md shadow-card' : 'bg-transparent'
       }`}
     >
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+      <nav className="container mx-auto px-4 sm:px-6 py-3 lg:py-4" aria-label="Main">
+        <div className="flex items-center justify-between gap-4">
           {/* Brand / Name */}
-          <div className="text-xl font-bold text-primary">Eric Njiraini | Analytics for Impact</div>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="py-2 text-lg sm:text-xl font-bold text-primary text-left leading-tight"
+          >
+            {profile.name}
+            <span className="hidden sm:inline font-semibold text-foreground/70"> | Analytics for Impact</span>
+          </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8 items-center">
-            {['about', 'skills', 'projects', 'contact'].map((item) => (
+          <div className="hidden lg:flex space-x-7 items-center">
+            {navSections.map((item) => (
               <button
                 key={item}
-                onClick={() => scrollToSection(item)}
+                onClick={() => goTo(item)}
                 className={`relative capitalize transition-colors duration-200 ${
                   activeSection === item
                     ? 'text-primary font-semibold'
@@ -69,7 +77,7 @@ const Header = () => {
 
             {/* Download CV */}
             <a
-              href={resumePdf}
+              href={profile.resume}
               download
               className="ml-4 text-sm font-medium text-foreground hover:text-primary border border-border px-4 py-2 rounded-lg transition"
             >
@@ -80,7 +88,7 @@ const Header = () => {
             <Button
               className="ml-2 animate-pulse hover:animate-none transition-all duration-500"
               style={{ animationDuration: '2.5s' }}
-              onClick={() => scrollToSection('contact')}
+              onClick={() => goTo('contact')}
             >
               Hire Me
             </Button>
@@ -89,26 +97,44 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
-            size="sm"
-            className="md:hidden"
+            size="icon"
+            className="lg:hidden h-11 w-11 shrink-0 hover:bg-primary/10 hover:text-foreground"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
           >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {isMenuOpen ? <X className="!size-6" /> : <Menu className="!size-6" />}
           </Button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 py-4 bg-card rounded-lg shadow-card">
-            {['about', 'skills', 'projects', 'contact'].map((item) => (
-              <button
-                key={item}
-                onClick={() => scrollToSection(item)}
-                className="block w-full text-left px-4 py-2 text-foreground hover:text-primary hover:bg-accent transition-colors duration-200 capitalize"
-              >
-                {item}
-              </button>
-            ))}
+          <div id="mobile-menu" className="lg:hidden mt-3 pb-2 animate-fade-in">
+            <ul className="divide-y divide-border border-y border-border">
+              {navSections.map((item) => (
+                <li key={item}>
+                  <button
+                    onClick={() => goTo(item)}
+                    className={`block w-full text-left px-2 py-3.5 text-base capitalize transition-colors ${
+                      activeSection === item ? 'text-primary font-semibold' : 'text-foreground hover:text-primary'
+                    }`}
+                  >
+                    {item}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <div className="grid grid-cols-2 gap-3 pt-4">
+              <Button asChild variant="outline" size="lg" className="px-4">
+                <a href={profile.resume} download>
+                  <Download /> Download CV
+                </a>
+              </Button>
+              <Button size="lg" className="px-4" onClick={() => goTo('contact')}>
+                Hire Me
+              </Button>
+            </div>
           </div>
         )}
       </nav>
