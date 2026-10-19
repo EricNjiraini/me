@@ -59,9 +59,9 @@ const Hero = () => {
           {/* Value proposition */}
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
             I lead analytics and drive data and AI strategy at Burn Manufacturing, a clean cookstove
-            maker and carbon developer in 10+ African countries. That means taking our data platform to
-            AWS, putting ML models into production, keeping data costs lean, and building the team and
-            dashboards leadership relies on.
+            maker and carbon developer in 10+ African countries. I set the data strategy that took our
+            platform to AWS, and today I put ML models into production, keep data costs lean, and build
+            the team and dashboards leadership relies on.
           </p>
 
           {/* CTA */}

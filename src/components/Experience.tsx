@@ -26,7 +26,7 @@ const employers: Employer[] = [
         title: 'Data Analytics Manager',
         period: 'Nov 2025 – Present',
         points: [
-          'Drive data and AI strategy: the data strategy I set led to migrating our data platform to AWS, and I run MLOps for models in production.',
+          'Drive AI strategy and run MLOps for the models we put into production on our AWS data platform.',
           'Lead cost optimisation across our data systems, and ran a resource gap analysis that led to hiring new analysts, whom I mentor.',
           'Lead analytics for Commercial, Field Operations, Customer Experience and Logistics, and own the executive dashboards and KPI frameworks leadership runs on.',
           'Ran TAM/SAM/SOM market sizing for Nigeria, Zambia, Malawi and Ethiopia to guide entry and investment decisions.',
@@ -37,6 +37,7 @@ const employers: Employer[] = [
         title: 'Data Analytics Lead',
         period: 'Jan 2023 – Nov 2025',
         points: [
+          'Set the data strategy that led to migrating our data platform to AWS.',
           'Built integrated data models joining ERP, CRM, warehouse and field data into one view of operations and demand.',
           'Developed Python, R and AWS pipelines that standardised and automated multi-source data flows.',
           'Introduced validation and monitoring that cut data inconsistencies, and trained teams in several countries to act on dashboards.',
