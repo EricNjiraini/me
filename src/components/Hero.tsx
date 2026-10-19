@@ -3,8 +3,8 @@ import { Button } from '@/components/ui/button';
 import heroImage from '@/assets/hero-bg.jpg';
 import { profile, scrollToSection } from '@/lib/profile';
 
-// Key selling points first, then the core stack.
-const focusAreas = ['AI Strategy', 'MLOps', 'Data Strategy', 'AWS Cloud', 'Power BI', 'Python · SQL · R'];
+// Capabilities only; individual tools live in the Skills section.
+const focusAreas = ['AI Strategy', 'MLOps', 'Data Strategy', 'AWS Cloud', 'Data Analytics'];
 
 const Hero = () => {
   return (
@@ -42,14 +42,10 @@ const Hero = () => {
 
           {/* Focus areas */}
           <ul className="flex flex-wrap justify-center gap-2 mb-8" aria-label="Focus areas">
-            {focusAreas.map((area, i) => (
+            {focusAreas.map((area) => (
               <li
                 key={area}
-                className={`px-3 py-1 rounded-full border text-sm font-medium ${
-                  i < 4
-                    ? 'border-primary/50 bg-primary/10 text-foreground'
-                    : 'border-primary/30 bg-card/70 text-foreground'
-                }`}
+                className="px-3 py-1 rounded-full border border-primary/50 bg-primary/10 text-sm font-medium text-foreground"
               >
                 {area}
               </li>
