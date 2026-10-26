@@ -34,7 +34,7 @@ const Insights = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1 bg-gradient-subtle pt-28 pb-16 md:pt-36 md:pb-24">
-        <div className="container mx-auto px-5 sm:px-6 max-w-5xl">
+        <div className="container mx-auto px-5 sm:px-6 max-w-6xl">
           <h1 className="text-4xl sm:text-5xl font-bold text-foreground">Insights</h1>
           <div className="w-24 h-1 bg-gradient-primary mt-5 mb-6" />
           <p className="max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed mb-8">
@@ -63,7 +63,7 @@ const Insights = () => {
             </div>
           )}
 
-          <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
+          <div className="grid gap-4 sm:gap-5 lg:grid-cols-2 xl:grid-cols-3">
             {shown.map((insight) => (
               <InsightCard key={insight.slug} insight={insight} />
             ))}

@@ -8,6 +8,8 @@ links:
   - label: View code
     url: https://github.com/EricNjiraini/Sample-Size-vs-Verification-Outcome-Monte-Carlo-Simulation
 featured: true
+tone: plum
+motif: scatter
 ---
 
 ## The question

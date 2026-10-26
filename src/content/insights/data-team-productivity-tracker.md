@@ -7,6 +7,8 @@ tags: [KPIs, Power BI, Smartsheet, Team Performance]
 links:
   - label: View code
     url: https://github.com/EricNjiraini/Data-Team-Productivity-Tracker
+tone: navy
+motif: trend
 ---
 
 ## The question

@@ -5,12 +5,17 @@ import path from 'node:path';
 import { Marked } from 'marked';
 import { parse as parseYaml } from 'yaml';
 import type { Plugin } from 'vite';
+import { coverMotifs, coverTones } from '../src/lib/covers';
 
 const TYPES = ['case-study', 'article', 'report', 'project']; // keep in sync with insightTypes in src/lib/insights.ts
+const TONES = Object.keys(coverTones);
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const FRONT_MATTER = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/;
 
 const marked = new Marked({ gfm: true, async: false });
+
+const decodeEntities = (text: string) =>
+  text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
 
 export default function insightsMarkdown(): Plugin {
   return {
@@ -49,7 +54,30 @@ export default function insightsMarkdown(): Plugin {
         fail('"links" must be a list of items with a label and a url');
       }
 
+      // Cover colour and artwork: a stable default per file name, so adding a piece
+      // never changes another's cover.
+      const hash = [...slug].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+      const choice = (key: string, options: readonly string[], fallback: string) => {
+        const value = meta[key];
+        if (value == null) return fallback;
+        return typeof value === 'string' && options.includes(value)
+          ? value
+          : fail(`"${key}" must be one of: ${options.join(', ')}`);
+      };
+      const tone = choice('tone', TONES, TONES[hash % TONES.length]);
+      const motif = choice('motif', coverMotifs, coverMotifs[(hash >>> 4) % coverMotifs.length]);
+
+      // Section headings get ids, so the page's "On this page" list can link to them.
+      const headings: { id: string; text: string }[] = [];
       const html = (marked.parse(body) as string)
+        .replace(/<h2>([\s\S]*?)<\/h2>/g, (_, inner: string) => {
+          const text = decodeEntities(inner.replace(/<[^>]+>/g, '')).trim();
+          const base = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'section';
+          let id = base;
+          for (let n = 2; headings.some((heading) => heading.id === id); n++) id = `${base}-${n}`;
+          headings.push({ id, text });
+          return `<h2 id="${id}">${inner}</h2>`;
+        })
         // External links open in a new tab; images load lazily; wide tables scroll on phones.
         .replace(/<a href="(https?:\/\/[^"]+)"/g, '<a href="$1" target="_blank" rel="noopener noreferrer"')
         .replace(/<img /g, '<img loading="lazy" ')
@@ -68,9 +96,12 @@ export default function insightsMarkdown(): Plugin {
         tags: tags.map(String),
         links,
         image: typeof meta.image === 'string' ? meta.image : undefined,
+        tone,
+        motif,
         featured: meta.featured === true,
         draft: meta.draft === true,
         readingTime: Math.max(1, Math.round(words / 220)),
+        headings,
         html,
       };
 

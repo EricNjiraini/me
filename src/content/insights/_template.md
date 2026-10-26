@@ -16,6 +16,9 @@ links:                       # buttons under the title; the icon follows the URL
   - label: View code
     url: https://github.com/EricNjiraini/your-repo
 featured: false              # true puts it on the homepage shelf, which shows the six newest featured pieces
+tone: ocean                  # cover colour: emerald, forest, ocean, navy, indigo, plum, wine, rust or slate
+motif: trend                 # cover drawing: heatmap, map, funnel, scatter, kpi, flow, stacked or trend
+                             # (leave tone and motif out to have them picked from the file name)
 # updated: 2026-02-15        # add when you revise a published piece
 # image: /images/insights/aws-data-strategy.png   # link-preview image saved in public/, ideally 1,200 × 630
 draft: true                  # shows in `npm run dev` only; delete this line to publish

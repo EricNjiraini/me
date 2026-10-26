@@ -1,5 +1,6 @@
 // The Insights library: one Markdown file per piece in src/content/insights/, compiled to
 // HTML at build time by scripts/insights-plugin.ts. To publish, copy _template.md.
+import type { CoverMotif, CoverTone } from './covers';
 
 export const insightTypes = {
   'case-study': { label: 'Case study', plural: 'Case studies' },
@@ -25,9 +26,12 @@ export interface Insight {
   tags: string[];
   links: InsightLink[];
   image?: string;
+  tone: CoverTone;
+  motif: CoverMotif;
   featured: boolean;
   draft: boolean;
   readingTime: number; // minutes
+  headings: { id: string; text: string }[]; // the body's h2s, for "On this page"
   html: string;
 }
 
@@ -69,9 +73,10 @@ const MONTHS = [
 
 // Formatted by hand: Intl's month names differ between ICU versions ("Sep" vs "Sept"),
 // which would make the prerendered HTML disagree with the browser and break hydration.
-export const formatInsightDate = (date: string) => {
+export const formatInsightDate = (date: string, short = false) => {
   const [year, month, day] = date.split('-').map(Number);
-  return `${day} ${MONTHS[month - 1]} ${year}`;
+  const name = MONTHS[month - 1];
+  return `${day} ${short ? name.slice(0, 3) : name} ${year}`;
 };
 
 // "2 case studies, 1 article and 8 projects", in the order of insightTypes.

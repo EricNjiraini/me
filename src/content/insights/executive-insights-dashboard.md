@@ -8,6 +8,8 @@ links:
   - label: View code
     url: https://github.com/EricNjiraini/Executive-Dashboard--From-Data-to-Decision
 featured: true
+tone: wine
+motif: kpi
 ---
 
 ## The question

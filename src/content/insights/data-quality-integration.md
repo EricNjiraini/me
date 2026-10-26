@@ -7,6 +7,8 @@ tags: [SQL, R, Data Validation, Data Integration]
 links:
   - label: View code
     url: https://github.com/EricNjiraini/Data-Quality-and-Integration-Across-Teams
+tone: emerald
+motif: stacked
 ---
 
 ## The question

@@ -8,6 +8,8 @@ links:
   - label: View code
     url: https://github.com/EricNjiraini/Data-Governance-Framework
 featured: true
+tone: indigo
+motif: flow
 ---
 
 ## The question

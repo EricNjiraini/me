@@ -8,6 +8,8 @@ links:
   - label: View code
     url: https://github.com/EricNjiraini/paygo-cookstove-market-entry
 featured: true
+tone: rust
+motif: funnel
 ---
 
 ## The question

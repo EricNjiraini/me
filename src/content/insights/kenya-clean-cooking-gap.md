@@ -8,6 +8,8 @@ links:
   - label: View code
     url: https://github.com/EricNjiraini/kenya-clean-cooking-gap
 featured: true
+tone: forest
+motif: map
 ---
 
 ## The question

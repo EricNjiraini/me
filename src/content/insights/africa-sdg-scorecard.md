@@ -10,6 +10,8 @@ links:
   - label: View code
     url: https://github.com/EricNjiraini/africa-sdg-scorecard
 featured: true
+tone: ocean
+motif: heatmap
 ---
 
 ## The question
