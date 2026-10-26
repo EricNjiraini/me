@@ -26,15 +26,15 @@ National averages hide the problem: the gap is spread very unevenly across count
 
 ## What it found
 
-- Urbanisation does not guarantee clean cooking access.
-- Ten counties have high electricity access but low LPG use. They are the strongest candidates for electric cooking pilots.
-- Adoption rises with wealth, but not in a straight line: it picks up sharply above a certain level.
-- Fuel choices differ between female- and male-headed households.
+- Urban counties generally have better access (r = 0.72), but urbanisation is no guarantee: eight relatively urban counties in the north and along the coast still have very low access.
+- Ten counties combine above-median electric cooking with below-median LPG use. They are the strongest candidates for e-cooking pilots.
+- Wealth tracks access most closely (r = 0.88), and not in a straight line: adoption picks up sharply above a certain level.
+- Counties with more female-headed households tend to have lower access (r = −0.38).
 
 ## Recommendations
 
 - **Expand LPG first** in large, high-deficit counties: Kakamega, Bungoma, Meru, Nakuru and Kilifi.
-- **Pilot induction cooking** in the ten high-electricity, low-LPG counties.
+- **Pilot induction cooking** in the ten e-cooking opportunity counties.
 - **Segment the response:** subsidised LPG for low-income rural counties, hybrid LPG and electric programmes for counties in transition, and appliance-led adoption in urban counties.
 - **Invest by county,** weighting by the household deficit rather than the national average.
 

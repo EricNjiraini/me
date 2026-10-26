@@ -29,7 +29,7 @@ The simulation is written in R with data.table for speed.
 - **Variability falls as samples grow,** as the Central Limit Theorem predicts. Below a certain size, differences between agents are mostly noise.
 - **Most agents show the same pattern:** the larger the sample, the steadier their rate.
 - **The effect held in every country** in the data, even though baseline verification rates differed. It comes from sampling itself, not from local operations.
-- **Larger samples gave slightly lower average rates,** most likely because a wider sample reaches harder-to-verify sales.
+- **Stability is the robust result, not the level.** How the average rate moved with sample size varied by country, so the case for larger samples rests on steadier rates, not on a higher or lower average.
 
 ## Why it matters
 
