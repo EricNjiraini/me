@@ -1,4 +1,4 @@
-import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail, Rss } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { profile } from '@/lib/profile';
 
@@ -26,6 +26,12 @@ const Footer = () => {
           <Button asChild variant="ghost" size="icon" className="h-11 w-11 hover:text-primary">
             <a href={`mailto:${profile.email}`} aria-label="Email">
               <Mail className="!size-5" />
+            </a>
+          </Button>
+          <Button asChild variant="ghost" size="icon" className="h-11 w-11 hover:text-primary">
+            {/* Static file written by scripts/prerender.mjs, so a plain link rather than a router Link */}
+            <a href="/insights/feed.xml" aria-label="Insights RSS feed">
+              <Rss className="!size-5" />
             </a>
           </Button>
           <Button

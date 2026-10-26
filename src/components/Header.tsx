@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Download, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { navSections, profile, scrollToSection } from '@/lib/profile';
@@ -6,7 +7,11 @@ import { navSections, profile, scrollToSection } from '@/lib/profile';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [scrolledSection, setScrolledSection] = useState('');
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const isHome = pathname === '/';
+  const activeSection = isHome ? scrolledSection : pathname.startsWith('/insights') ? 'insights' : '';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,7 +22,7 @@ const Header = () => {
         const rect = document.getElementById(section)?.getBoundingClientRect();
         return rect && rect.top <= 80 && rect.bottom >= 80;
       });
-      setActiveSection(current ?? '');
+      setScrolledSection(current ?? '');
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -32,8 +37,11 @@ const Header = () => {
     return () => window.removeEventListener('keydown', onKey);
   }, [isMenuOpen]);
 
+  // Off the home page, sections are reached through the home page,
+  // except Insights, which has a page of its own.
   const goTo = (id: string) => {
-    scrollToSection(id);
+    if (isHome) scrollToSection(id);
+    else navigate(id === 'insights' ? '/insights' : `/#${id}`);
     setIsMenuOpen(false);
   };
 
@@ -46,13 +54,18 @@ const Header = () => {
       <nav className="container mx-auto px-4 sm:px-6 py-3 lg:py-4" aria-label="Main">
         <div className="flex items-center justify-between gap-4">
           {/* Brand / Name */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          <Link
+            to="/"
+            onClick={(e) => {
+              if (!isHome) return;
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className="py-2 text-lg sm:text-xl font-bold text-primary text-left leading-tight"
           >
             {profile.name}
             <span className="hidden sm:inline font-semibold text-foreground/70"> | Analytics for Impact</span>
-          </button>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex space-x-7 items-center">

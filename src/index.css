@@ -93,3 +93,9 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Wide tables in insights scroll sideways on phones instead of widening the page.
+   Outside @layer so Tailwind keeps it: the class only appears in the Markdown plugin's output. */
+.prose .table-scroll {
+  overflow-x: auto;
+}

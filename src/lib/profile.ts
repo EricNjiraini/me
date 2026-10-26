@@ -12,7 +12,13 @@ export const profile = {
   resume: resumePdf,
 };
 
-export const navSections = ['about', 'experience', 'skills', 'projects', 'contact'] as const;
+export const siteUrl = 'https://ericnjiraini.com';
+
+// Keep in sync with the <title> in index.html, which the prerendered home page uses.
+export const homeTitle = 'Eric Njiraini — Data Analytics Manager | Data & AI Strategy, MLOps, AWS';
+export const pageTitle = (title: string) => `${title} | Eric Njiraini`;
+
+export const navSections = ['about', 'experience', 'skills', 'insights', 'contact'] as const;
 
 export const scrollToSection = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });

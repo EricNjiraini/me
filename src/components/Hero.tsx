@@ -69,10 +69,10 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center max-w-sm sm:max-w-none mx-auto mb-10">
             <Button
               size="lg"
-              onClick={() => scrollToSection('projects')}
+              onClick={() => scrollToSection('insights')}
               className="bg-gradient-primary hover:shadow-glow transition-all duration-300"
             >
-              View Projects
+              Explore Insights
             </Button>
             <Button asChild variant="outline" size="lg">
               <a href={profile.resume} download>
