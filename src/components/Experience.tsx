@@ -26,11 +26,12 @@ const employers: Employer[] = [
         title: 'Data Analytics Manager',
         period: 'Nov 2025 – Present',
         points: [
-          'Drive AI strategy and run MLOps for the models we put into production on our AWS data platform.',
-          'Lead cost optimisation across our data systems, and ran a resource gap analysis that led to hiring new analysts, whom I mentor.',
-          'Lead analytics for Commercial, Field Operations, Customer Experience and Logistics, and own the executive dashboards and KPI frameworks leadership runs on.',
+          'Lead a team of four analysts as the data partner to Commercial, Field Operations, Customer Experience and Logistics, across both the biomass and electric cookstove businesses. A resource gap analysis I ran made the case for growing the team.',
+          'Drive AI strategy and run MLOps for the models we put into production on our AWS data platform, and lead cost optimisation across our data systems.',
+          'Automated agent commission calculations for about 1,400 field agents, cutting processing from two weeks to three days.',
+          'Own the executive dashboards and KPI frameworks used by the CEO, directors and heads of department, cutting the time to key commercial decisions from days to hours. The departments we support rate our contribution 4.5 out of 5.',
           'Ran TAM/SAM/SOM market sizing for Nigeria, Zambia, Malawi and Ethiopia to guide entry and investment decisions.',
-          'Set data quality and governance standards that hold critical datasets at 97% accuracy.',
+          'Set governance standards that give every critical dataset an owner, documentation, validation checks and lineage. Accuracy holds at 97%, and data incidents fell 75% year on year.',
         ],
       },
       {

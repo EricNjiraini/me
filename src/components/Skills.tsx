@@ -7,13 +7,13 @@ const skillCategories = [
   {
     icon: <Sparkles className="w-6 h-6 text-primary" />,
     title: "AI & Data Strategy",
-    skills: ["AI Strategy", "MLOps", "Data Strategy", "AWS Cloud Migration", "Cost Optimisation", "Resource Gap Analysis", "Roadmap Planning"],
+    skills: ["AI Strategy", "MLOps", "Data Strategy", "AWS Cloud Migration", "Cost Optimisation", "Resource Gap Analysis", "OKRs & Roadmap Planning", "Process Automation"],
     featured: true,
   },
   {
     icon: <Brain className="w-6 h-6 text-primary" />,
     title: "Analytics & Modelling",
-    skills: ["Market Sizing (TAM/SAM/SOM)", "Credit Risk Modelling", "Churn & Survival Analysis", "A/B Testing", "Statistical Analysis", "Time Series", "Geospatial Analysis"],
+    skills: ["Market Sizing (TAM/SAM/SOM)", "Credit Risk Modelling", "Churn & Survival Analysis", "Sales Funnel Analytics", "Customer Experience Analytics", "A/B Testing", "Statistical Analysis", "Time Series", "Geospatial Analysis"],
   },
   {
     icon: <Code className="w-6 h-6 text-primary" />,
@@ -33,7 +33,7 @@ const skillCategories = [
   {
     icon: <Users className="w-6 h-6 text-primary" />,
     title: "Leadership & Governance",
-    skills: ["Team Building & Hiring", "Analyst Mentorship", "Stakeholder Communication", "Data Storytelling", "Data Literacy Training", "Data Quality Frameworks", "Data Stewardship", "KoboCollect / ODK"],
+    skills: ["Team Building & Hiring", "Analyst Mentorship", "Stakeholder Communication", "Data Storytelling", "Data Literacy Training", "Data Quality Frameworks", "Data Stewardship", "Data Lineage", "KoboCollect / ODK"],
   },
 ];
 
