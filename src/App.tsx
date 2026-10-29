@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Index from "./pages/Index";
 import Insights from "./pages/Insights";
 import InsightPage from "./pages/InsightPage";
@@ -48,6 +49,7 @@ const App = () => (
   <BrowserRouter>
     <AppRoutes />
     <Analytics />
+    <SpeedInsights />
   </BrowserRouter>
 );
 
