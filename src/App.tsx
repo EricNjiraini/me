@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import Index from "./pages/Index";
 import Insights from "./pages/Insights";
 import InsightPage from "./pages/InsightPage";
@@ -46,6 +47,7 @@ export const AppRoutes = () => (
 const App = () => (
   <BrowserRouter>
     <AppRoutes />
+    <Analytics />
   </BrowserRouter>
 );
 
