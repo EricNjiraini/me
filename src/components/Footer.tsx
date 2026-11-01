@@ -6,11 +6,16 @@ const Footer = () => {
   return (
     <footer className="border-t border-border bg-background">
       <div className="container mx-auto px-5 sm:px-6 py-8 flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
-        {/* suppressHydrationWarning: the prerendered year can lag the visitor's clock at New Year */}
-        <p className="text-sm text-muted-foreground text-center sm:text-left" suppressHydrationWarning>
-          © {new Date().getFullYear()} {profile.name}
-          <span className="hidden sm:inline"> · {profile.role}</span> · {profile.location}
-        </p>
+        <div className="text-sm text-muted-foreground text-center sm:text-left">
+          {/* suppressHydrationWarning: the prerendered year can lag the visitor's clock at New Year */}
+          <p suppressHydrationWarning>
+            © {new Date().getFullYear()} {profile.name}
+            <span className="hidden sm:inline"> · {profile.role}</span> · {profile.location}
+          </p>
+          <p className="mt-1 text-xs">
+            All rights reserved · Quote and link with credit; ask before republishing or commercial use.
+          </p>
+        </div>
 
         <div className="flex items-center gap-1">
           <Button asChild variant="ghost" size="icon" className="h-11 w-11 hover:text-primary">

@@ -156,6 +156,7 @@ write(
     <atom:link href="${siteUrl}/insights/feed.xml" rel="self" type="application/rss+xml" />
     <description>${escape(libraryDescription)}</description>
     <language>en-gb</language>
+    <copyright>© ${new Date().getFullYear()} Eric Njiraini. All rights reserved.</copyright>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${insights
   .map(
